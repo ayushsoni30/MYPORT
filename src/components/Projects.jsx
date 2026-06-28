@@ -38,9 +38,9 @@ const PROJECTS = [
     description:
       'A responsive React quiz app with real-time question fetching from OpenTDB API, 15-second countdown timer with auto-submit, Framer Motion animations, audio feedback, SVG progress bar, and confetti animation for high scores.',
     tech: ['React.js', 'Framer Motion', 'OpenTDB API', 'JavaScript', 'CSS3', 'Vite'],
-    demoUrl: '#',
+    demoUrl: 'https://quizii-by-ayush.vercel.app/',
     githubUrl: 'https://github.com/ayushsoni30/Quizii-by-Ayush',
-    comingSoon: true,
+    comingSoon: false,
     graphic: (
       <div className="w-full h-full bg-[#0a0f1d] flex flex-col p-4 font-sans text-xs text-text-muted justify-between select-none">
         <div className="flex items-center justify-between border-b border-border-dark pb-2 mb-2">
