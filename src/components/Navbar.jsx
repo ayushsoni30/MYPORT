@@ -114,7 +114,7 @@ export default function Navbar() {
         {/* Right CTA */}
         <div className="hidden lg:flex items-center">
           <a
-            href="https://drive.google.com/file/d/1GtcM5X_tLoRk3gyO2ME3ddVqIebXMZUO/view?usp=drivesdk"
+            href="https://drive.google.com/file/d/1rDK1SqpkNtg-_5OPk1mGV4hyliJLRHhH/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-primary text-primary hover:bg-primary hover:text-white font-sans text-sm font-semibold transition-all duration-300 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)]"
