@@ -149,7 +149,7 @@ export default function Contact() {
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <a
-            href="https://drive.google.com/file/d/1GtcM5X_tLoRk3gyO2ME3ddVqIebXMZUO/view?usp=drivesdk"
+            href="https://drive.google.com/file/d/1rDK1SqpkNtg-_5OPk1mGV4hyliJLRHhH/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 bg-primary hover:bg-primary/95 text-white font-sans text-sm md:text-base font-bold px-8 py-4 rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] w-full sm:w-auto"
@@ -159,7 +159,7 @@ export default function Contact() {
             View Resume
           </a>
           <a
-            href="https://drive.google.com/file/d/1GtcM5X_tLoRk3gyO2ME3ddVqIebXMZUO/view?usp=drivesdk"
+            href="https://drive.google.com/file/d/1rDK1SqpkNtg-_5OPk1mGV4hyliJLRHhH/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 border border-border-dark hover:border-white text-text-muted hover:text-white font-sans text-sm md:text-base font-bold px-8 py-4 rounded-full bg-card-dark/40 hover:bg-card-dark/80 transition-all duration-300 w-full sm:w-auto"
