@@ -20,16 +20,26 @@ import {
   SiStreamlit,
 } from 'react-icons/si'
 import { DiCss3 } from 'react-icons/di'
+import { SiFastapi } from "react-icons/si";
 import { TbBrandVscode } from 'react-icons/tb'
 import { FiLock, FiServer, FiShield } from 'react-icons/fi'
-
+import { DiMysql } from "react-icons/di";
+import { sup } from 'framer-motion/client';
 const SKILL_CATEGORIES = [
   {
     title: 'Languages',
     skills: [
       { name: 'JavaScript', icon: SiJavascript },
       { name: 'TypeScript', icon: SiTypescript },
-      { name: 'Python', icon: SiPython },
+      {
+  name: (
+    <>
+      Python <sub>[Pandas, NumPy, matplotlib]</sub>
+    </>
+  ),
+  icon: SiPython
+}
+
     ],
   },
   {
@@ -46,17 +56,20 @@ const SKILL_CATEGORIES = [
     skills: [
       { name: 'Node.js', icon: SiNodedotjs },
       { name: 'Express.js', icon: SiExpress },
+      { name: 'FASTapi', icon: SiFastapi  },
     ],
   },
   {
     title: 'Database',
-    skills: [{ name: 'MongoDB', icon: SiMongodb }],
+    skills: [
+  { name: 'MongoDB', icon: SiMongodb },
+  { name: 'SQL (Learning)', icon: DiMysql },
+]
   },
   {
     title: 'Auth & Security',
     skills: [
       { name: 'JWT', icon: SiJsonwebtokens },
-      { name: 'OAuth 2.0', icon: FiLock },
       { name: 'Auth0', icon: SiAuth0 },
       { name: 'bcrypt', icon: FiShield },
     ],
@@ -65,7 +78,6 @@ const SKILL_CATEGORIES = [
     title: 'Deployment',
     skills: [
       { name: 'Vercel', icon: SiVercel },
-      { name: 'Netlify', icon: SiNetlify },
       { name: 'Render', icon: FiServer },
     ],
   },
