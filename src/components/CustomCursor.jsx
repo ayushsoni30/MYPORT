@@ -6,14 +6,15 @@ export default function CustomCursor() {
   const mouseY = useMotionValue(-100)
 
   // Fast tracking spring for the inner dot
-  const dotX = useSpring(mouseX, { stiffness: 800, damping: 45, mass: 0.1 })
-  const dotY = useSpring(mouseY, { stiffness: 800, damping: 45, mass: 0.1 })
+  const dotX = useSpring(mouseX, { stiffness: 850, damping: 45, mass: 0.1 })
+  const dotY = useSpring(mouseY, { stiffness: 850, damping: 45, mass: 0.1 })
 
   // Trailing spring for the outer ring
   const ringX = useSpring(mouseX, { stiffness: 220, damping: 28, mass: 0.6 })
   const ringY = useSpring(mouseY, { stiffness: 220, damping: 28, mass: 0.6 })
 
-  const [isHovered, setIsHovered] = useState(false)
+  // Cursor states: 'default' | 'pointer' | 'magnify'
+  const [cursorState, setCursorState] = useState('default')
   const [isVisible, setIsVisible] = useState(false)
   const [isTouchDevice, setIsTouchDevice] = useState(true)
 
@@ -37,11 +38,25 @@ export default function CustomCursor() {
     const handleMouseLeave = () => setIsVisible(false)
     const handleMouseEnter = () => setIsVisible(true)
 
-    // Event listener to check if we are hovering over interactive elements
+    // Event listener to check if we are hovering over interactive or magnifiable elements
     const handleMouseOver = (e) => {
       const target = e.target
       if (!target) return
 
+      // Magnify triggers:
+      // 1. All elements in the header / navbar (links, buttons, search)
+      // 2. Headings (h1, h2, h3)
+      // 3. Elements with explicit class 'cursor-magnify'
+      const isHeaderItem = target.closest('header a') || target.closest('header button') || target.closest('header [role="button"]')
+      const isHeading = target.tagName === 'H1' || target.tagName === 'H2' || target.tagName === 'H3' || target.closest('h1') || target.closest('h2') || target.closest('h3')
+      const hasMagnifyClass = target.classList.contains('cursor-magnify') || target.closest('.cursor-magnify')
+
+      if (isHeaderItem || isHeading || hasMagnifyClass) {
+        setCursorState('magnify')
+        return
+      }
+
+      // Pointer triggers:
       const isInteractive =
         target.tagName === 'A' ||
         target.tagName === 'BUTTON' ||
@@ -54,7 +69,11 @@ export default function CustomCursor() {
         target.classList.contains('cursor-pointer') ||
         window.getComputedStyle(target).cursor === 'pointer'
 
-      setIsHovered(isInteractive)
+      if (isInteractive) {
+        setCursorState('pointer')
+      } else {
+        setCursorState('default')
+      }
     }
 
     window.addEventListener('mousemove', moveCursor)
@@ -74,36 +93,69 @@ export default function CustomCursor() {
   // Don't render custom cursor on touch devices or if not moved yet
   if (isTouchDevice || !isVisible) return null
 
+  // Define animations based on cursor state
+  const ringVariants = {
+    default: {
+      scale: 1,
+      backgroundColor: 'rgba(59, 130, 246, 0)',
+      borderColor: '#3b82f6',
+      borderWidth: '2px',
+    },
+    pointer: {
+      scale: 1.6,
+      backgroundColor: 'rgba(59, 130, 246, 0.25)',
+      borderColor: 'rgba(255, 255, 255, 0.8)',
+      borderWidth: '2px',
+    },
+    magnify: {
+      scale: 3.2,
+      backgroundColor: 'rgba(255, 255, 255, 0.08)',
+      borderColor: 'rgba(255, 255, 255, 0.85)',
+      borderWidth: '1px',
+    }
+  }
+
+  const dotVariants = {
+    default: {
+      scale: 1,
+      backgroundColor: '#3b82f6',
+    },
+    pointer: {
+      scale: 0,
+      backgroundColor: '#3b82f6',
+    },
+    magnify: {
+      scale: 0,
+      backgroundColor: '#ffffff',
+    }
+  }
+
   return (
     <>
       {/* Outer Spring Ring */}
       <motion.div
-        className="fixed top-0 left-0 w-9 h-9 rounded-full border-2 border-primary pointer-events-none z-[9999] mix-blend-difference hidden md:block"
+        className="fixed top-0 left-0 w-9 h-9 rounded-full pointer-events-none z-[9999] mix-blend-difference hidden md:block"
         style={{
           x: ringX,
           y: ringY,
           translateX: '-50%',
           translateY: '-50%',
         }}
-        animate={{
-          scale: isHovered ? 1.5 : 1,
-          backgroundColor: isHovered ? 'rgba(59, 130, 246, 0.3)' : 'rgba(59, 130, 246, 0)',
-          borderColor: isHovered ? 'rgba(255, 255, 255, 0.8)' : '#3b82f6',
-        }}
+        animate={cursorState}
+        variants={ringVariants}
         transition={{ type: 'spring', stiffness: 350, damping: 25 }}
       />
       {/* Inner Dot */}
       <motion.div
-        className="fixed top-0 left-0 w-2.5 h-2.5 rounded-full bg-primary pointer-events-none z-[9999] mix-blend-difference hidden md:block"
+        className="fixed top-0 left-0 w-2.5 h-2.5 rounded-full pointer-events-none z-[9999] mix-blend-difference hidden md:block"
         style={{
           x: dotX,
           y: dotY,
           translateX: '-50%',
           translateY: '-50%',
         }}
-        animate={{
-          scale: isHovered ? 0 : 1,
-        }}
+        animate={cursorState}
+        variants={dotVariants}
         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
       />
     </>
