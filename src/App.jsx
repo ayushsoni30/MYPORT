@@ -29,64 +29,89 @@ export default function App() {
     // Register GSAP plugins
     gsap.registerPlugin(ScrollTrigger)
 
+    const isMobile = window.innerWidth < 768
+
     // Select all main page sections (except Hero which animates on load)
     const sections = document.querySelectorAll('main > section:not(#home)')
 
     sections.forEach((section, index) => {
-      const isEven = index % 2 === 0
-      const rotateYStart = isEven ? 24 : -24
+      if (isMobile) {
+        // Safe, clean mobile-friendly transitions (no 3D clipping)
+        gsap.set(section, {
+          opacity: 0,
+          y: 25, // Reduced vertical offset to settle faster
+          rotateX: 0,
+          rotateY: 0,
+          z: 0,
+          scale: 1,
+        })
 
-      // Initial 3D carousel transform states
-      gsap.set(section, {
-        opacity: 0,
-        y: 140,
-        z: -450,
-        rotateY: rotateYStart,
-        rotateX: 12,
-        scale: 0.85,
-        transformPerspective: 1600,
-        transformOrigin: isEven ? 'left center' : 'right center',
-      })
+        gsap.to(section, {
+          opacity: 1,
+          y: 0,
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 100%', // start immediately when entering screen bottom
+            end: 'top 78%', // finish transition earlier
+            scrub: 1.0,
+            toggleActions: 'play none none reverse',
+          },
+        })
+      } else {
+        const isEven = index % 2 === 0
+        const rotateYStart = isEven ? 12 : -12 // Gentler angles
 
-      // Animates on scroll trigger
-      gsap.to(section, {
-        opacity: 1,
-        y: 0,
-        z: 0,
-        rotateY: 0,
-        rotateX: 0,
-        scale: 1,
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 95%', // start when section top enters 95% of viewport height
-          end: 'top 55%',
-          scrub: 1.6, // buttery smooth scrub lag
-          toggleActions: 'play none none reverse',
-        },
-      })
+        // Initial 3D carousel transform states
+        gsap.set(section, {
+          opacity: 0,
+          y: 75, // Reduced vertical offset to settle faster
+          z: -140, // Gentler depth skewing
+          rotateY: rotateYStart,
+          rotateX: 6,
+          scale: 0.9,
+          transformPerspective: 1600,
+          transformOrigin: isEven ? 'left center' : 'right center',
+        })
+
+        // Animates on scroll trigger
+        gsap.to(section, {
+          opacity: 1,
+          y: 0,
+          z: 0,
+          rotateY: 0,
+          rotateX: 0,
+          scale: 1,
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 100%', // start immediately when entering screen bottom
+            end: 'top 74%', // finish transition earlier, settling section at the lower third
+            scrub: 1.5,
+            toggleActions: 'play none none reverse',
+          },
+        })
+      }
     })
 
-    // Heading reveal animations (clip-path/translateY slide up)
-    const headings = document.querySelectorAll('main h2')
-    headings.forEach((heading) => {
-      const originalText = heading.innerHTML
-      heading.innerHTML = `<span style="display: block; transform: translateY(105%); transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);">${originalText}</span>`
-      heading.style.overflow = 'hidden'
-      heading.style.display = 'block'
-      
-      ScrollTrigger.create({
-        trigger: heading,
-        start: 'top 92%',
-        onEnter: () => {
-          const span = heading.querySelector('span')
-          if (span) span.style.transform = 'translateY(0%)'
-        },
-        onLeaveBack: () => {
-          const span = heading.querySelector('span')
-          if (span) span.style.transform = 'translateY(105%)'
-        }
+    // Heading reveal animations (clip-path/translateY slide up) - Desktop only to avoid multiline clipping on mobile
+    if (!isMobile) {
+      const headings = document.querySelectorAll('main h2')
+      headings.forEach((heading) => {
+        const originalText = heading.innerHTML
+        heading.innerHTML = `<span class="reveal-span" style="display: block; transform: translateY(105%);">${originalText}</span>`
+        heading.style.overflow = 'hidden'
+        heading.style.display = 'block'
+        
+        const span = heading.querySelector('.reveal-span')
+        
+        ScrollTrigger.create({
+          trigger: heading,
+          start: 'top 90%',
+          onEnter: () => gsap.to(span, { y: '0%', duration: 0.8, ease: 'power3.out' }),
+          onLeaveBack: () => gsap.to(span, { y: '105%', duration: 0.6, ease: 'power3.in' }),
+          onEnterBack: () => gsap.to(span, { y: '0%', duration: 0.8, ease: 'power3.out' })
+        })
       })
-    })
+    }
 
     // Entrance Timeline
     const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.4 } })

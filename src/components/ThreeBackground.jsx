@@ -260,7 +260,7 @@ export default function ThreeBackground() {
       particles.rotation.x = time * 0.02 - mouse.y * 0.25
 
       // Slide camera position downward following the flight path of particles
-      const targetCamY = -scrollPercent * 16.0
+      const targetCamY = -scrollPercent * (isMobile ? 8.0 : 16.0)
       camera.position.y += (targetCamY - camera.position.y) * 0.15
       camera.lookAt(0, camera.position.y, 0)
 
