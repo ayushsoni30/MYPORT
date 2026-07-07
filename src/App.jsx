@@ -11,6 +11,7 @@ import Certifications from './components/Certifications'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import CustomCursor from './components/CustomCursor'
+import { ReactLenis } from 'lenis/react'
 
 export default function App() {
   const { scrollYProgress } = useScroll()
@@ -21,39 +22,41 @@ export default function App() {
   })
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.6 }}
-      className="min-h-screen bg-bg-dark text-text-light selection:bg-primary/30 selection:text-text-light transition-colors duration-300"
-    >
-      {/* Custom smooth spring cursor */}
-      <CustomCursor />
-
-      {/* Top Scroll Progress Bar */}
+    <ReactLenis root>
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-primary z-100 origin-left"
-        style={{ scaleX }}
-      />
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="min-h-screen bg-bg-dark text-text-light selection:bg-primary/30 selection:text-text-light transition-colors duration-300"
+      >
+        {/* Custom smooth spring cursor */}
+        <CustomCursor />
 
-      {/* Navigation Bar */}
-      <Navbar />
+        {/* Top Scroll Progress Bar */}
+        <motion.div
+          className="fixed top-0 left-0 right-0 h-1 bg-primary z-100 origin-left"
+          style={{ scaleX }}
+        />
 
-      {/* Page Sections */}
-      <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <Projects />
-        <Achievements />
-        <Education />
-        <Certifications />
-        <Contact />
-      </main>
+        {/* Navigation Bar */}
+        <Navbar />
 
-      {/* Footer */}
-      <Footer />
-    </motion.div>
+        {/* Page Sections */}
+        <main>
+          <Hero />
+          <About />
+          <Skills />
+          <Experience />
+          <Projects />
+          <Achievements />
+          <Education />
+          <Certifications />
+          <Contact />
+        </main>
+
+        {/* Footer */}
+        <Footer />
+      </motion.div>
+    </ReactLenis>
   )
 }

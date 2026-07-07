@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiMenu, FiX, FiSearch, FiGithub, FiLinkedin, FiSun, FiMoon } from 'react-icons/fi'
+import { useLenis } from 'lenis/react'
 
 const PRIMARY_LINKS = [
   { label: 'Home', href: '#home' },
@@ -31,6 +32,9 @@ export default function Navbar() {
     }
     return 'dark'
   })
+
+  // Lenis Smooth Scroll instance
+  const lenis = useLenis()
 
   // Command Palette State
   const [isPaletteOpen, setIsPaletteOpen] = useState(false)
@@ -103,10 +107,14 @@ export default function Navbar() {
     const el = document.getElementById(targetId)
     if (el) {
       const offsetTop = el.offsetTop - 80 // Navbar offset
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth',
-      })
+      if (lenis) {
+        lenis.scrollTo(offsetTop)
+      } else {
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth',
+        })
+      }
       setActiveSection(targetId)
     }
   }
