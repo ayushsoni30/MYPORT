@@ -110,3 +110,27 @@ body {
     transform: scale(1.03) translateY(-0.5px);
   }
 }
+
+/* 3D Perspective and Hardware Acceleration Utility Classes */
+main {
+  perspective: 1500px;
+  transform-style: preserve-3d;
+}
+
+main > section {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.transform-gpu {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Smooth transition presets for magnetic elements */
+.magnetic {
+  display: inline-block;
+  will-change: transform;
+}
+

@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import { FiGithub, FiExternalLink } from 'react-icons/fi'
 
@@ -104,6 +105,137 @@ const PROJECTS = [
   },
 ]
 
+function ProjectCard({ project, cardVariants }) {
+  const cardRef = useRef(null)
+
+  const handleMouseMove = (e) => {
+    const card = cardRef.current
+    if (!card) return
+
+    const rect = card.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+
+    const centerX = rect.width / 2
+    const centerY = rect.height / 2
+
+    // Calculate rotation (-1 to 1 scale)
+    const rotateX = -((y - centerY) / centerY) * 10 // max 10 degrees
+    const rotateY = ((x - centerX) / centerX) * 10 // max 10 degrees
+
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`
+    card.style.borderColor = '#3b82f6'
+    card.style.boxShadow = '0 20px 40px rgba(59, 130, 246, 0.18)'
+    card.style.setProperty('--spotlight-x', `${x}px`)
+    card.style.setProperty('--spotlight-y', `${y}px`)
+  }
+
+  const handleMouseLeave = () => {
+    const card = cardRef.current
+    if (!card) return
+
+    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)'
+    card.style.borderColor = 'var(--border-dark)'
+    card.style.boxShadow = 'none'
+  }
+
+  return (
+    <motion.div
+      ref={cardRef}
+      variants={cardVariants}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="bg-card-dark border border-border-dark rounded-2xl overflow-hidden shadow-2xl flex flex-col h-full group transition-all duration-300 ease-out origin-center transform-gpu relative"
+    >
+      {/* Spotlight Hover Glow Overlay */}
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"
+        style={{
+          background: `radial-gradient(320px circle at var(--spotlight-x, 0px) var(--spotlight-y, 0px), rgba(96, 165, 250, 0.08), transparent 80%)`,
+        }}
+      />
+
+      {/* Simulated Graphic Container with Image Zoom effect on hover */}
+      <div className="h-48 border-b border-border-dark overflow-hidden relative z-10">
+        <div className="w-full h-full transition-transform duration-500 group-hover:scale-105">
+          {project.graphic}
+        </div>
+      </div>
+
+      {/* Project Card Content */}
+      <div className="p-6 flex flex-col grow text-left relative z-10">
+        {/* Badges */}
+        <div className="flex flex-wrap gap-1.5 mb-3">
+          {project.badges.map((badge, bIdx) => (
+            <span
+              key={bIdx}
+              className="font-sans text-[10px] font-bold tracking-wider px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20"
+            >
+              {badge}
+            </span>
+          ))}
+        </div>
+
+        <h3 className="font-display font-bold text-xl text-text-light mb-3 group-hover:text-primary transition-colors duration-200">
+          {project.title}
+        </h3>
+
+        <p className="font-sans text-sm text-text-muted mb-6 leading-relaxed grow">
+          {project.description}
+        </p>
+
+        {/* Tech Tags */}
+        <div className="flex flex-wrap gap-1.5 mb-6">
+          {project.tech.map((t, tIdx) => (
+            <span
+              key={tIdx}
+              className="font-sans text-xs bg-bg-dark text-text-muted px-2.5 py-1 rounded-md border border-border-dark/60"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex items-center gap-3 mt-auto">
+          {project.comingSoon ? (
+            <button
+              disabled
+              className="flex items-center justify-center gap-1.5 bg-gray-700/50 text-gray-500 font-sans text-xs font-semibold px-4 py-2.5 rounded-xl border border-gray-700 cursor-not-allowed w-1/2"
+              aria-label="Live demo disabled"
+            >
+              <FiExternalLink />
+              Coming Soon
+            </button>
+          ) : (
+            <a
+              href={project.demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-1.5 bg-primary hover:bg-primary/90 text-white font-sans text-xs font-semibold px-4 py-2.5 rounded-xl transition-all duration-300 w-1/2 shadow-md hover:shadow-[0_0_10px_rgba(59,130,246,0.3)]"
+              aria-label="Live Demo"
+            >
+              <FiExternalLink />
+              Live Demo
+            </a>
+          )}
+
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-1.5 border border-border-dark hover:border-text-light text-text-muted hover:text-text-light font-sans text-xs font-semibold px-4 py-2.5 rounded-xl bg-bg-dark/40 hover:bg-bg-dark/80 transition-all duration-300 w-1/2"
+            aria-label="GitHub Repository"
+          >
+            <FiGithub />
+            GitHub
+          </a>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
 export default function Projects() {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -161,91 +293,7 @@ export default function Projects() {
           viewport={{ once: true, margin: '-100px' }}
         >
           {PROJECTS.map((project, idx) => (
-            <motion.div
-              key={idx}
-              variants={cardVariants}
-              whileHover={{ y: -8, borderColor: '#3b82f6' }}
-              transition={{ duration: 0.3 }}
-              className="bg-card-dark border border-border-dark rounded-2xl overflow-hidden shadow-2xl flex flex-col h-full hover:shadow-[0_15px_30px_rgba(59,130,246,0.15)] group"
-            >
-              {/* Simulated Graphic Container with Image Zoom effect on hover */}
-              <div className="h-48 border-b border-border-dark overflow-hidden relative">
-                <div className="w-full h-full transition-transform duration-500 group-hover:scale-105">
-                  {project.graphic}
-                </div>
-              </div>
-
-              {/* Project Card Content */}
-              <div className="p-6 flex flex-col grow text-left">
-                {/* Badges */}
-                <div className="flex flex-wrap gap-1.5 mb-3">
-                  {project.badges.map((badge, bIdx) => (
-                    <span
-                      key={bIdx}
-                      className="font-sans text-[10px] font-bold tracking-wider px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20"
-                    >
-                      {badge}
-                    </span>
-                  ))}
-                </div>
-
-                <h3 className="font-display font-bold text-xl text-text-light mb-3 group-hover:text-primary transition-colors duration-200">
-                  {project.title}
-                </h3>
-
-                <p className="font-sans text-sm text-text-muted mb-6 leading-relaxed grow">
-                  {project.description}
-                </p>
-
-                {/* Tech Tags */}
-                <div className="flex flex-wrap gap-1.5 mb-6">
-                  {project.tech.map((t, tIdx) => (
-                    <span
-                      key={tIdx}
-                      className="font-sans text-xs bg-bg-dark text-text-muted px-2.5 py-1 rounded-md border border-border-dark/60"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex items-center gap-3 mt-auto">
-                  {project.comingSoon ? (
-                    <button
-                      disabled
-                      className="flex items-center justify-center gap-1.5 bg-gray-700/50 text-gray-500 font-sans text-xs font-semibold px-4 py-2.5 rounded-xl border border-gray-700 cursor-not-allowed w-1/2"
-                      aria-label="Live demo disabled"
-                    >
-                      <FiExternalLink />
-                      Coming Soon
-                    </button>
-                  ) : (
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-1.5 bg-primary hover:bg-primary/90 text-white font-sans text-xs font-semibold px-4 py-2.5 rounded-xl transition-all duration-300 w-1/2 shadow-md hover:shadow-[0_0_10px_rgba(59,130,246,0.3)]"
-                      aria-label="Live Demo"
-                    >
-                      <FiExternalLink />
-                      Live Demo
-                    </a>
-                  )}
-
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-1.5 border border-border-dark hover:border-text-light text-text-muted hover:text-text-light font-sans text-xs font-semibold px-4 py-2.5 rounded-xl bg-bg-dark/40 hover:bg-bg-dark/80 transition-all duration-300 w-1/2"
-                    aria-label="GitHub Repository"
-                  >
-                    <FiGithub />
-                    GitHub
-                  </a>
-                </div>
-              </div>
-            </motion.div>
+            <ProjectCard key={idx} project={project} cardVariants={cardVariants} />
           ))}
         </motion.div>
 
