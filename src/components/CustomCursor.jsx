@@ -100,18 +100,21 @@ export default function CustomCursor() {
       backgroundColor: 'rgba(59, 130, 246, 0)',
       borderColor: '#3b82f6',
       borderWidth: '2px',
+      boxShadow: '0 0 0px rgba(59, 130, 246, 0)',
     },
     pointer: {
       scale: 1.6,
       backgroundColor: 'rgba(59, 130, 246, 0.25)',
       borderColor: 'rgba(255, 255, 255, 0.8)',
       borderWidth: '2px',
+      boxShadow: '0 0 0px rgba(59, 130, 246, 0)',
     },
     magnify: {
-      scale: 3.2,
-      backgroundColor: 'rgba(255, 255, 255, 0.08)',
-      borderColor: 'rgba(255, 255, 255, 0.85)',
-      borderWidth: '1px',
+      scale: 5.2,
+      backgroundColor: 'rgba(59, 130, 246, 0.06)',
+      borderColor: 'rgba(59, 130, 246, 0.8)',
+      borderWidth: '1.5px',
+      boxShadow: '0 0 25px rgba(59, 130, 246, 0.45)',
     }
   }
 
@@ -134,16 +137,21 @@ export default function CustomCursor() {
     <>
       {/* Outer Spring Ring */}
       <motion.div
-        className="fixed top-0 left-0 w-9 h-9 rounded-full pointer-events-none z-[9999] mix-blend-difference hidden md:block"
+        className={`fixed top-0 left-0 w-9 h-9 rounded-full pointer-events-none z-[9999] hidden md:block ${
+          cursorState !== 'magnify' ? 'mix-blend-difference' : ''
+        }`}
         style={{
           x: ringX,
           y: ringY,
           translateX: '-50%',
           translateY: '-50%',
+          backdropFilter: cursorState === 'magnify' 
+            ? 'saturate(2) brightness(1.3) blur(0.5px)' 
+            : 'none',
         }}
         animate={cursorState}
         variants={ringVariants}
-        transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+        transition={{ type: 'spring', stiffness: 320, damping: 24 }}
       />
       {/* Inner Dot */}
       <motion.div
