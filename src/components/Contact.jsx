@@ -78,7 +78,7 @@ export default function Contact() {
           <span className="text-primary font-display font-medium tracking-widest text-sm uppercase">
             Get In Touch
           </span>
-          <h2 className="font-display font-bold text-3xl md:text-5xl text-white tracking-tight mt-2 mb-4">
+          <h2 className="font-display font-bold text-3xl md:text-5xl text-text-light tracking-tight mt-2 mb-4">
             Let's Connect
           </h2>
           <p className="font-sans text-text-muted text-base md:text-lg max-w-xl mx-auto">
@@ -126,7 +126,7 @@ export default function Contact() {
                   }`}>
                     <Icon />
                   </span>
-                  <h3 className="font-display font-semibold text-base text-white mb-2">
+                  <h3 className="font-display font-semibold text-base text-text-light mb-2">
                     {card.title}
                   </h3>
                   <p className={`font-sans text-sm break-all font-medium transition-colors duration-200 ${
@@ -162,7 +162,7 @@ export default function Contact() {
             href="https://drive.google.com/file/d/1rDK1SqpkNtg-_5OPk1mGV4hyliJLRHhH/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 border border-border-dark hover:border-white text-text-muted hover:text-white font-sans text-sm md:text-base font-bold px-8 py-4 rounded-full bg-card-dark/40 hover:bg-card-dark/80 transition-all duration-300 w-full sm:w-auto"
+            className="flex items-center justify-center gap-2 border border-border-dark hover:border-text-light text-text-muted hover:text-text-light font-sans text-sm md:text-base font-bold px-8 py-4 rounded-full bg-card-dark/40 hover:bg-card-dark/80 transition-all duration-300 w-full sm:w-auto"
             aria-label="Download Resume from Google Drive"
           >
             <FiDownload />

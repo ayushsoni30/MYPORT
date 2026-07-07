@@ -4,14 +4,30 @@
 @theme {
   --color-primary: #3b82f6;
   --color-secondary: #60a5fa;
-  --color-bg-dark: #0b1120;
-  --color-card-dark: #111827;
-  --color-text-light: #ffffff;
-  --color-text-muted: #94a3b8;
-  --color-border-dark: #1e293b;
+  --color-bg-dark: var(--bg-dark);
+  --color-card-dark: var(--card-dark);
+  --color-text-light: var(--text-light);
+  --color-text-muted: var(--text-muted);
+  --color-border-dark: var(--border-dark);
 
   --font-sans: 'Inter', sans-serif;
   --font-display: 'Space Grotesk', sans-serif;
+}
+
+:root {
+  --bg-dark: #0b1120;
+  --card-dark: #111827;
+  --text-light: #ffffff;
+  --text-muted: #94a3b8;
+  --border-dark: #1e293b;
+}
+
+:root.light {
+  --bg-dark: #f8fafc;
+  --card-dark: #ffffff;
+  --text-light: #0f172a;
+  --text-muted: #475569;
+  --border-dark: #e2e8f0;
 }
 
 /* Custom scrollbar styling */
@@ -19,12 +35,12 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0b1120;
+  background: var(--bg-dark);
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: var(--border-dark);
   border-radius: 9999px;
-  border: 2px solid #0b1120;
+  border: 2px solid var(--bg-dark);
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #3b82f6;
@@ -36,10 +52,18 @@ html {
 }
 
 body {
-  background-color: #0b1120;
-  color: #ffffff;
+  background-color: var(--bg-dark);
+  color: var(--text-light);
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hide default cursor on desktop devices when custom cursor is active */
+@media (pointer: fine) {
+  body, a, button, select, input, textarea, [role="button"], [class*="cursor-pointer"] {
+    cursor: none !important;
+  }
 }
 
 /* For Framer Motion transition stability */

@@ -43,7 +43,7 @@ export default function Experience() {
           <span className="text-primary font-display font-medium tracking-widest text-sm uppercase">
             My Journey
           </span>
-          <h2 className="font-display font-bold text-3xl md:text-5xl text-white tracking-tight mt-2 mb-6">
+          <h2 className="font-display font-bold text-3xl md:text-5xl text-text-light tracking-tight mt-2 mb-6">
             Professional Experience
           </h2>
           <div className="h-1 w-20 bg-primary mx-auto rounded-full" />
@@ -59,7 +59,7 @@ export default function Experience() {
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.4, delay: 0.2 }}
-                className="absolute -left-[45px] md:-left-[61px] top-1.5 w-6 h-6 rounded-full bg-[#0b1120] border-2 border-primary flex items-center justify-center"
+                className="absolute -left-[45px] md:-left-[61px] top-1.5 w-6 h-6 rounded-full bg-bg-dark border-2 border-primary flex items-center justify-center"
               >
                 <div className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse" />
               </motion.div>
@@ -74,7 +74,7 @@ export default function Experience() {
               >
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4">
                   <div>
-                    <h3 className="font-display font-bold text-lg md:text-xl text-white group-hover:text-primary transition-colors duration-200">
+                    <h3 className="font-display font-bold text-lg md:text-xl text-text-light group-hover:text-primary transition-colors duration-200">
                       {exp.role}
                     </h3>
                     <span className="font-sans text-sm font-semibold text-secondary">
@@ -85,7 +85,7 @@ export default function Experience() {
                     <span className="font-sans text-xs bg-bg-dark border border-border-dark text-text-muted px-3 py-1 rounded-full">
                       {exp.duration}
                     </span>
-                    <span className="font-sans text-xs bg-bg-dark border border-border-dark text-white px-3 py-1 rounded-full flex items-center gap-1">
+                    <span className="font-sans text-xs bg-bg-dark border border-border-dark text-text-light px-3 py-1 rounded-full flex items-center gap-1">
                       {exp.type}
                     </span>
                     {exp.badge && (

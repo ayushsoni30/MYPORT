@@ -48,7 +48,7 @@ export default function About() {
           <span className="text-primary font-display font-medium tracking-widest text-sm uppercase">
             About Me
           </span>
-          <h2 className="font-display font-bold text-3xl md:text-5xl text-white tracking-tight mt-2 mb-6">
+          <h2 className="font-display font-bold text-3xl md:text-5xl text-text-light tracking-tight mt-2 mb-6">
             My Background
           </h2>
           <div className="h-1 w-20 bg-primary mx-auto rounded-full" />
@@ -64,19 +64,19 @@ export default function About() {
             variants={itemVariants}
           >
             <p>
-              I'm <strong className="text-white font-semibold">Ayush Soni</strong>, a Full Stack
+              I'm <strong className="text-text-light font-semibold">Ayush Soni</strong>, a Full Stack
               Developer specializing in the MERN stack — MongoDB, Express.js, React, and Node.js. I
               build performant, scalable web applications with clean UI and robust backend
               architecture.
             </p>
             <p>
               I have hands-on experience integrating AI into production apps, having built projects
-              using <strong className="text-white font-semibold">Claude API</strong> for
+              using <strong className="text-text-light font-semibold">Claude API</strong> for
               intelligent, context-aware user experiences.
             </p>
             <p>
               Currently pursuing{' '}
-              <strong className="text-white font-semibold">B.Tech in CSE (AI & ML)</strong> from
+              <strong className="text-text-light font-semibold">B.Tech in CSE (AI & ML)</strong> from
               School of Management Sciences, Lucknow, and actively exploring Generative AI, RAG
               pipelines, and AI Agents to build the next generation of intelligent applications.
             </p>
@@ -101,7 +101,7 @@ export default function About() {
                 <span className="text-3xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
                   {stat.icon}
                 </span>
-                <span className="font-sans text-sm md:text-base font-semibold text-white tracking-wide leading-snug">
+                <span className="font-sans text-sm md:text-base font-semibold text-text-light tracking-wide leading-snug">
                   {stat.text}
                 </span>
               </motion.div>

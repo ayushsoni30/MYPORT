@@ -71,7 +71,7 @@ export default function Hero() {
           <span className="text-primary font-display font-medium tracking-widest text-sm uppercase mb-4">
             Hi, I'm
           </span>
-          <h1 className="font-display font-bold text-5xl md:text-7xl text-white tracking-tight leading-none mb-6">
+          <h1 className="font-display font-bold text-5xl md:text-7xl text-text-light tracking-tight leading-none mb-6">
             Ayush Soni
           </h1>
 
@@ -104,7 +104,7 @@ export default function Hero() {
               href="https://drive.google.com/file/d/1GtcM5X_tLoRk3gyO2ME3ddVqIebXMZUO/view?usp=drivesdk"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 border border-border-dark hover:border-white text-text-muted hover:text-white font-sans text-sm md:text-base font-semibold px-8 py-3.5 rounded-full bg-card-dark/40 hover:bg-card-dark/80 transition-all duration-300"
+              className="flex items-center justify-center gap-2 border border-border-dark hover:border-text-light text-text-muted hover:text-text-light font-sans text-sm md:text-base font-semibold px-8 py-3.5 rounded-full bg-card-dark/40 hover:bg-card-dark/80 transition-all duration-300"
             >
               <FiFileText />
               Download Resume

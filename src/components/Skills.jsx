@@ -120,7 +120,7 @@ export default function Skills() {
           <span className="text-primary font-display font-medium tracking-widest text-sm uppercase">
             My Toolbox
           </span>
-          <h2 className="font-display font-bold text-3xl md:text-5xl text-white tracking-tight mt-2 mb-6">
+          <h2 className="font-display font-bold text-3xl md:text-5xl text-text-light tracking-tight mt-2 mb-6">
             Skills & Technologies
           </h2>
           <div className="h-1 w-20 bg-primary mx-auto rounded-full" />
@@ -154,7 +154,7 @@ export default function Skills() {
                       className="bg-bg-dark border border-border-dark px-3 py-2.5 rounded-xl flex items-center gap-2.5 transition-all duration-300 hover:shadow-[0_0_12px_rgba(59,130,246,0.2)] group"
                     >
                       <Icon className="text-xl text-text-muted group-hover:text-primary transition-colors duration-200" />
-                      <span className="font-sans text-xs md:text-sm text-white group-hover:text-white font-medium truncate">
+                      <span className="font-sans text-xs md:text-sm text-text-light group-hover:text-primary font-medium truncate">
                         {skill.name}
                       </span>
                     </motion.div>

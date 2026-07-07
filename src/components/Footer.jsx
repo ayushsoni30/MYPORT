@@ -1,4 +1,4 @@
-import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+import { FiGithub, FiMail } from "react-icons/fi";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear(); // Dynamically use current year (2026 as per design guidelines or dynamic)
@@ -9,7 +9,7 @@ export default function Footer() {
         {/* Copyright Signature */}
         <p className="font-sans text-sm text-text-muted text-center md:text-left">
           Designed & Developed by{" "}
-          <span className="text-white font-semibold hover:text-primary transition-colors duration-200">
+          <span className="text-text-light font-semibold hover:text-primary transition-colors duration-200">
             Ayush Soni
           </span>{" "}
           © {currentYear}

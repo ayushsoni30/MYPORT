@@ -69,7 +69,7 @@ export default function Certifications() {
           <span className="text-primary font-display font-medium tracking-widest text-sm uppercase">
             Credentials
           </span>
-          <h2 className="font-display font-bold text-3xl md:text-5xl text-white tracking-tight mt-2 mb-4">
+          <h2 className="font-display font-bold text-3xl md:text-5xl text-text-light tracking-tight mt-2 mb-4">
             Certifications
           </h2>
           <p className="font-sans text-text-muted text-base md:text-lg mb-6">
@@ -90,7 +90,7 @@ export default function Certifications() {
             <span className="font-sans text-[10px] font-bold tracking-widest text-secondary uppercase bg-secondary/10 px-3 py-1 rounded-full border border-secondary/20">
               Active Focus
             </span>
-            <h3 className="font-display font-bold text-lg text-white mt-3">
+            <h3 className="font-display font-bold text-lg text-text-light mt-3">
               Currently Learning: Generative AI & LLMs
             </h3>
             <p className="font-sans text-sm text-text-muted mt-1">
@@ -128,7 +128,7 @@ export default function Certifications() {
                     {cert.badge}
                   </span>
                 </div>
-                <h3 className="font-display font-bold text-lg text-white mb-2 leading-snug group-hover:text-primary transition-colors duration-200">
+                <h3 className="font-display font-bold text-lg text-text-light mb-2 leading-snug group-hover:text-primary transition-colors duration-200">
                   {cert.title}
                 </h3>
                 <p className="font-sans text-sm font-semibold text-secondary mb-4">
@@ -136,14 +136,14 @@ export default function Certifications() {
                 </p>
                 <div className="space-y-1.5 border-t border-border-dark/60 pt-4 font-sans text-xs text-text-muted">
                   <div>
-                    <span className="text-white font-medium">Issued:</span> {cert.issued}
+                    <span className="text-text-light font-medium">Issued:</span> {cert.issued}
                   </div>
                   <div>
-                    <span className="text-white font-medium">Duration:</span> {cert.duration}
+                    <span className="text-text-light font-medium">Duration:</span> {cert.duration}
                   </div>
                   {cert.instructor && (
                     <div>
-                      <span className="text-white font-medium">By:</span> {cert.instructor}
+                      <span className="text-text-light font-medium">By:</span> {cert.instructor}
                     </div>
                   )}
                 </div>

@@ -34,7 +34,7 @@ export default function Education() {
           <span className="text-primary font-display font-medium tracking-widest text-sm uppercase">
             Learning Path
           </span>
-          <h2 className="font-display font-bold text-3xl md:text-5xl text-white tracking-tight mt-2 mb-6">
+          <h2 className="font-display font-bold text-3xl md:text-5xl text-text-light tracking-tight mt-2 mb-6">
             Education
           </h2>
           <div className="h-1 w-20 bg-primary mx-auto rounded-full" />
@@ -50,7 +50,7 @@ export default function Education() {
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.4, delay: 0.2 }}
-                className="absolute -left-[45px] md:-left-[61px] top-1.5 w-6 h-6 rounded-full bg-[#0b1120] border-2 border-primary flex items-center justify-center"
+                className="absolute -left-[45px] md:-left-[61px] top-1.5 w-6 h-6 rounded-full bg-bg-dark border-2 border-primary flex items-center justify-center"
               >
                 <div className="w-2.5 h-2.5 rounded-full bg-primary" />
               </motion.div>
@@ -65,7 +65,7 @@ export default function Education() {
               >
                 <div>
                   <div className="flex items-center gap-3 flex-wrap mb-2">
-                    <h3 className="font-display font-bold text-lg md:text-xl text-white group-hover:text-primary transition-colors duration-200">
+                    <h3 className="font-display font-bold text-lg md:text-xl text-text-light group-hover:text-primary transition-colors duration-200">
                       {edu.institution}
                     </h3>
                     {edu.badge && (

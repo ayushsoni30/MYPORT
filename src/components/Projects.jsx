@@ -143,7 +143,7 @@ export default function Projects() {
           <span className="text-primary font-display font-medium tracking-widest text-sm uppercase">
             My Portfolio
           </span>
-          <h2 className="font-display font-bold text-3xl md:text-5xl text-white tracking-tight mt-2 mb-4">
+          <h2 className="font-display font-bold text-3xl md:text-5xl text-text-light tracking-tight mt-2 mb-4">
             Featured Projects
           </h2>
           <p className="font-sans text-text-muted text-base md:text-lg mb-6">
@@ -189,7 +189,7 @@ export default function Projects() {
                   ))}
                 </div>
 
-                <h3 className="font-display font-bold text-xl text-white mb-3 group-hover:text-primary transition-colors duration-200">
+                <h3 className="font-display font-bold text-xl text-text-light mb-3 group-hover:text-primary transition-colors duration-200">
                   {project.title}
                 </h3>
 
@@ -237,7 +237,7 @@ export default function Projects() {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-1.5 border border-border-dark hover:border-white text-text-muted hover:text-white font-sans text-xs font-semibold px-4 py-2.5 rounded-xl bg-bg-dark/40 hover:bg-bg-dark/80 transition-all duration-300 w-1/2"
+                    className="flex items-center justify-center gap-1.5 border border-border-dark hover:border-text-light text-text-muted hover:text-text-light font-sans text-xs font-semibold px-4 py-2.5 rounded-xl bg-bg-dark/40 hover:bg-bg-dark/80 transition-all duration-300 w-1/2"
                     aria-label="GitHub Repository"
                   >
                     <FiGithub />

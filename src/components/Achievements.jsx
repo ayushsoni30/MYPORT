@@ -57,7 +57,7 @@ export default function Achievements() {
           <span className="text-primary font-display font-medium tracking-widest text-sm uppercase">
             Milestones
           </span>
-          <h2 className="font-display font-bold text-3xl md:text-5xl text-white tracking-tight mt-2 mb-4">
+          <h2 className="font-display font-bold text-3xl md:text-5xl text-text-light tracking-tight mt-2 mb-4">
             Achievements
           </h2>
           <p className="font-sans text-text-muted text-base md:text-lg mb-6">
@@ -87,7 +87,7 @@ export default function Achievements() {
                   {ach.icon}
                 </span>
                 <div className="flex-grow">
-                  <h3 className="font-display font-bold text-lg md:text-xl text-white group-hover:text-primary transition-colors duration-200">
+                  <h3 className="font-display font-bold text-lg md:text-xl text-text-light group-hover:text-primary transition-colors duration-200">
                     {ach.title}
                   </h3>
                   {ach.institution && (
