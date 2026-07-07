@@ -89,3 +89,24 @@ body {
 .pulse-badge {
   animation: pulse-green 2s infinite ease-in-out;
 }
+
+/* Smooth zoom magnification for text elements on hover */
+@media (pointer: fine) {
+  header a,
+  header button,
+  h1,
+  h2,
+  h3,
+  .cursor-magnify {
+    transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease !important;
+  }
+
+  header a:hover,
+  header button:hover,
+  h1:hover,
+  h2:hover,
+  h3:hover,
+  .cursor-magnify:hover {
+    transform: scale(1.03) translateY(-0.5px);
+  }
+}

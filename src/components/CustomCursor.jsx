@@ -110,11 +110,11 @@ export default function CustomCursor() {
       boxShadow: '0 0 0px rgba(59, 130, 246, 0)',
     },
     magnify: {
-      scale: 5.2,
-      backgroundColor: 'rgba(59, 130, 246, 0.06)',
+      scale: 3.6,
+      backgroundColor: 'rgba(59, 130, 246, 0.05)',
       borderColor: 'rgba(59, 130, 246, 0.8)',
       borderWidth: '1.5px',
-      boxShadow: '0 0 25px rgba(59, 130, 246, 0.45)',
+      boxShadow: '0 0 20px rgba(59, 130, 246, 0.35)',
     }
   }
 
@@ -146,7 +146,7 @@ export default function CustomCursor() {
           translateX: '-50%',
           translateY: '-50%',
           backdropFilter: cursorState === 'magnify' 
-            ? 'saturate(2) brightness(1.3) blur(0.5px)' 
+            ? 'saturate(1.8) brightness(1.2)' 
             : 'none',
         }}
         animate={cursorState}
