@@ -26,20 +26,20 @@ export default function App() {
   })
 
   useEffect(() => {
-    // Register GSAP plugins
+   
     gsap.registerPlugin(ScrollTrigger)
 
     const isMobile = window.innerWidth < 768
 
-    // Select all main page sections (except Hero which animates on load)
+   
     const sections = document.querySelectorAll('main > section:not(#home)')
 
     sections.forEach((section, index) => {
       if (isMobile) {
-        // Safe, clean mobile-friendly transitions (no 3D clipping)
+     
         gsap.set(section, {
           opacity: 0,
-          y: 25, // Reduced vertical offset to settle faster
+          y: 25, 
           rotateX: 0,
           rotateY: 0,
           z: 0,
@@ -91,27 +91,28 @@ export default function App() {
         })
       }
     })
+const headings = document.querySelectorAll("main h2");
 
-    // Heading reveal animations (clip-path/translateY slide up) - Desktop only to avoid multiline clipping on mobile
-    if (!isMobile) {
-      const headings = document.querySelectorAll('main h2')
-      headings.forEach((heading) => {
-        const originalText = heading.innerHTML
-        heading.innerHTML = `<span class="reveal-span" style="display: block; transform: translateY(105%);">${originalText}</span>`
-        heading.style.overflow = 'hidden'
-        heading.style.display = 'block'
-        
-        const span = heading.querySelector('.reveal-span')
-        
-        ScrollTrigger.create({
-          trigger: heading,
-          start: 'top 90%',
-          onEnter: () => gsap.to(span, { y: '0%', duration: 0.8, ease: 'power3.out' }),
-          onLeaveBack: () => gsap.to(span, { y: '105%', duration: 0.6, ease: 'power3.in' }),
-          onEnterBack: () => gsap.to(span, { y: '0%', duration: 0.8, ease: 'power3.out' })
-        })
-      })
+headings.forEach((heading) => {
+  gsap.fromTo(
+    heading,
+    {
+      opacity: 0,
+      y: 40,
+    },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: heading,
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      },
     }
+  );
+});
 
     // Entrance Timeline
     const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.4 } })
@@ -132,22 +133,20 @@ export default function App() {
         transition={{ duration: 0.6 }}
         className="min-h-screen bg-bg-dark text-text-light selection:bg-primary/30 selection:text-text-light transition-colors duration-300 relative"
       >
-        {/* Global 3D Particle Field */}
+    
         <ThreeBackground />
 
-        {/* Custom smooth spring cursor */}
+       
         <CustomCursor />
 
-        {/* Top Scroll Progress Bar */}
         <motion.div
           className="fixed top-0 left-0 right-0 h-1 bg-primary z-100 origin-left"
           style={{ scaleX }}
         />
 
-        {/* Navigation Bar */}
         <Navbar />
 
-        {/* Page Sections */}
+        
         <main className="relative z-10">
           <Hero />
           <About />

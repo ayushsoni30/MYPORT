@@ -22,9 +22,12 @@ import {
 import { DiCss3 } from 'react-icons/di'
 import { SiFastapi } from "react-icons/si";
 import { TbBrandVscode } from 'react-icons/tb'
-import { FiLock, FiServer, FiShield } from 'react-icons/fi'
+import { FiServer, FiShield } from 'react-icons/fi'
 import { DiMysql } from "react-icons/di";
-import { sup } from 'framer-motion/client';
+import { FaDocker } from "react-icons/fa";
+import { TbBinaryTree2 } from "react-icons/tb";
+import { MdArchitecture } from "react-icons/md";
+import { LuWorkflow } from "react-icons/lu";
 const SKILL_CATEGORIES = [
   {
     title: 'Languages',
@@ -67,6 +70,14 @@ const SKILL_CATEGORIES = [
 ]
   },
   {
+  title: 'Core CS',
+  skills: [
+    { name: 'OOP (Python)', icon: SiPython },
+{ name: 'Data Structures & Algorithms', icon: TbBinaryTree2 },
+    { name: 'System Design', icon: MdArchitecture },
+  ],
+},
+  {
     title: 'Auth & Security',
     skills: [
       { name: 'JWT', icon: SiJsonwebtokens },
@@ -81,6 +92,13 @@ const SKILL_CATEGORIES = [
       { name: 'Render', icon: FiServer },
     ],
   },
+  {
+  title: 'DevOps',
+  skills: [
+    { name: 'Docker', icon: FaDocker },
+    { name: 'CI/CD', icon: LuWorkflow },
+  ],
+},
   {
     title: 'Tools',
     skills: [
