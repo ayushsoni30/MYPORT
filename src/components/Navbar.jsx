@@ -28,9 +28,9 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') || 'dark'
+      return localStorage.getItem('theme') || 'warm'
     }
-    return 'dark'
+    return 'warm'
   })
 
   // Lenis Smooth Scroll instance
@@ -45,10 +45,10 @@ export default function Navbar() {
   // Track theme changes
   useEffect(() => {
     const root = document.documentElement
-    if (theme === 'light') {
-      root.classList.add('light')
+    if (theme === 'mono') {
+      root.classList.add('mono')
     } else {
-      root.classList.remove('light')
+      root.classList.remove('mono')
     }
     localStorage.setItem('theme', theme)
   }, [theme])
@@ -148,7 +148,7 @@ export default function Navbar() {
       <motion.header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? 'bg-bg-dark/85 backdrop-blur-md border-b border-border-dark py-3.5 shadow-lg'
+            ? 'bg-black/40 backdrop-blur-xl border-b border-white/10 py-3.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]'
             : 'bg-transparent py-5'
         }`}
         initial={{ y: -100 }}
@@ -163,14 +163,14 @@ export default function Navbar() {
               onClick={(e) => handleScrollTo(e, 'home')}
               className="font-display font-bold text-xl tracking-wider text-primary flex items-center gap-2 group cursor-pointer"
             >
-              <span className="bg-primary text-white w-7 h-7 rounded-full flex items-center justify-center text-xs font-sans transition-transform duration-300 group-hover:rotate-12">
+              <span className="bg-primary text-black w-7 h-7 flex items-center justify-center text-xs font-sans transition-transform duration-300 group-hover:rotate-12">
                 AS
               </span>
               <span className="text-text-light group-hover:text-primary transition-colors duration-200">
                 Ayush Soni
               </span>
             </a>
-            <span className="hidden sm:inline-block font-mono text-[10px] bg-card-dark border border-border-dark text-text-muted px-2 py-0.5 rounded-full select-none">
+            <span className="hidden sm:inline-block font-mono text-[10px] bg-card-dark border border-border-dark text-text-muted px-2 py-0.5 select-none">
               v1.0.0
             </span>
           </div>
@@ -194,7 +194,7 @@ export default function Navbar() {
                     {isActive && (
                       <motion.span
                         layoutId="activeUnderline"
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary shadow-[0_0_8px_#FF8C42]"
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -227,6 +227,13 @@ export default function Navbar() {
             >
               <FiGithub />
             </a>
+            <button
+              onClick={() => setTheme(theme === 'warm' ? 'mono' : 'warm')}
+              className="text-text-muted hover:text-primary text-lg transition-all duration-200 hover:scale-105 cursor-pointer"
+              aria-label="Toggle Theme"
+            >
+              {theme === 'warm' ? <FiMoon /> : <FiSun />}
+            </button>
             <a
               href="https://www.linkedin.com/in/ayushsoni3030"
               target="_blank"
@@ -236,13 +243,6 @@ export default function Navbar() {
             >
               <FiLinkedin />
             </a>
-            <button
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="text-text-muted hover:text-primary text-lg transition-all duration-200 hover:scale-105 cursor-pointer p-1 rounded-md"
-              aria-label="Toggle Theme"
-            >
-              {theme === 'dark' ? <FiSun /> : <FiMoon />}
-            </button>
           </div>
 
           {/* Mobile controls */}
@@ -253,13 +253,6 @@ export default function Navbar() {
               aria-label="Search"
             >
               <FiSearch size={20} />
-            </button>
-            <button
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="p-2 text-text-muted hover:text-primary cursor-pointer"
-              aria-label="Toggle Theme"
-            >
-              {theme === 'dark' ? <FiSun size={18} /> : <FiMoon size={18} />}
             </button>
             <button
               className="text-text-light hover:text-primary p-2 focus:outline-none cursor-pointer"
@@ -306,8 +299,8 @@ export default function Navbar() {
                 </div>
 
                 <div className="border-t border-border-dark pt-4 flex items-center justify-between">
-                  <span className="text-xs text-text-muted">Follow Me:</span>
-                  <div className="flex gap-4">
+                  <span className="text-xs text-text-muted">Follow & Theme:</span>
+                  <div className="flex gap-4 items-center">
                     <a
                       href="https://github.com/ayushsoni30"
                       target="_blank"
@@ -317,6 +310,13 @@ export default function Navbar() {
                     >
                       <FiGithub />
                     </a>
+                    <button
+                      onClick={() => setTheme(theme === 'warm' ? 'mono' : 'warm')}
+                      className="text-text-muted hover:text-primary text-xl cursor-pointer"
+                      aria-label="Toggle Theme"
+                    >
+                      {theme === 'warm' ? <FiMoon /> : <FiSun />}
+                    </button>
                     <a
                       href="https://www.linkedin.com/in/ayushsoni3030"
                       target="_blank"
@@ -353,10 +353,10 @@ export default function Navbar() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -20 }}
               transition={{ duration: 0.2 }}
-              className="relative w-full max-w-xl bg-card-dark border border-border-dark rounded-xl shadow-2xl overflow-hidden mx-4 flex flex-col"
+              className="relative w-full max-w-xl bg-card-dark border border-border-dark rounded-2xl neon-glow-border overflow-hidden mx-4 flex flex-col"
             >
-              {/* Search Header */}
-              <div className="flex items-center gap-3 px-4 py-3.5 border-b border-border-dark">
+              {/* Search Header with Glow Focus */}
+              <div className="flex items-center gap-3 px-4 py-3.5 border-b border-border-dark/60 focus-within:border-primary/80 focus-within:shadow-[0_0_15px_rgba(255,140,66,0.25)] transition-all duration-200">
                 <FiSearch className="text-text-muted text-lg shrink-0" />
                 <input
                   ref={searchInputRef}
@@ -388,9 +388,9 @@ export default function Navbar() {
                         key={section.id}
                         onClick={() => handleScrollTo(null, section.id)}
                         onMouseEnter={() => setSelectedIndex(index)}
-                        className={`flex flex-col gap-0.5 px-3 py-2.5 rounded-lg cursor-pointer transition-all duration-150 ${
+                        className={`flex flex-col gap-0.5 px-3 py-2.5 cursor-pointer transition-all duration-150 ${
                           isSelected
-                            ? 'bg-primary text-white'
+                            ? 'bg-primary text-black'
                             : 'hover:bg-bg-dark text-text-light'
                         }`}
                       >
@@ -406,7 +406,7 @@ export default function Navbar() {
                         </div>
                         <span
                           className={`font-sans text-xs ${
-                            isSelected ? 'text-white/80' : 'text-text-muted'
+                            isSelected ? 'text-black/80' : 'text-text-muted'
                           }`}
                         >
                           {section.desc}

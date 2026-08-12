@@ -168,7 +168,7 @@ export default function Skills() {
             <motion.div
               key={idx}
               variants={cardVariants}
-              className="bg-card-dark border border-border-dark p-6 rounded-2xl flex flex-col justify-start text-left shadow-lg"
+              className="bg-card-dark border border-border-dark p-6 rounded-2xl flex flex-col justify-start text-left shadow-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,140,66,0.2)]"
             >
               <h3 className="font-display font-semibold text-lg text-secondary mb-5 border-b border-border-dark/60 pb-2">
                 {category.title}
@@ -179,9 +179,9 @@ export default function Skills() {
                   return (
                     <motion.div
                       key={sIdx}
-                      whileHover={{ y: -4, borderColor: '#3b82f6' }}
+                      whileHover={{ y: -4, borderColor: 'rgba(255, 140, 66, 0.85)' }}
                       transition={{ duration: 0.2 }}
-                      className="bg-bg-dark border border-border-dark px-3 py-2.5 rounded-xl flex items-center gap-2.5 transition-all duration-300 hover:shadow-[0_0_12px_rgba(59,130,246,0.2)] group"
+                      className="bg-bg-dark border border-border-dark px-3 py-2.5 rounded-xl flex items-center gap-2.5 transition-all duration-300 hover:shadow-[0_0_12px_rgba(255,140,66,0.3)] group"
                     >
                       <Icon className="text-xl text-text-muted group-hover:text-primary transition-colors duration-200" />
                       <span className="font-sans text-xs md:text-sm text-text-light group-hover:text-primary font-medium truncate">

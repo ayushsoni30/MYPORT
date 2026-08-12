@@ -115,9 +115,9 @@ export default function Contact() {
               >
                 <CardWrapper
                   {...props}
-                  className={`bg-card-dark border border-border-dark p-6 rounded-2xl flex flex-col items-center justify-center text-center shadow-lg transition-all duration-300 h-full grow block ${
+                  className={`bg-card-dark border-2 border-border-dark p-6 rounded-2xl flex flex-col items-center justify-center text-center shadow-lg transition-all duration-300 h-full grow block ${
                     card.href
-                      ? 'hover:border-primary/60 hover:shadow-[0_10px_20px_rgba(59,130,246,0.12)] cursor-pointer group'
+                      ? 'hover:border-primary/80 hover:shadow-[0_0_30px_rgba(255,140,66,0.5),_0_0_50px_rgba(212,165,116,0.25)] cursor-pointer group'
                       : 'cursor-default'
                   }`}
                 >
@@ -152,7 +152,7 @@ export default function Contact() {
             href="https://drive.google.com/file/d/1rDK1SqpkNtg-_5OPk1mGV4hyliJLRHhH/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 bg-primary hover:bg-primary/95 text-white font-sans text-sm md:text-base font-bold px-8 py-4 rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] w-full sm:w-auto"
+            className="flex items-center justify-center gap-2 btn-primary-neon text-sm md:text-base px-8 py-4 transition-all duration-300 w-full sm:w-auto cursor-pointer"
             aria-label="View Resume in Google Drive"
           >
             <FiFileText />
@@ -162,7 +162,7 @@ export default function Contact() {
             href="https://drive.google.com/file/d/1rDK1SqpkNtg-_5OPk1mGV4hyliJLRHhH/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 border border-border-dark hover:border-text-light text-text-muted hover:text-text-light font-sans text-sm md:text-base font-bold px-8 py-4 rounded-full bg-card-dark/40 hover:bg-card-dark/80 transition-all duration-300 w-full sm:w-auto"
+            className="flex items-center justify-center gap-2 btn-secondary-neon text-sm md:text-base px-8 py-4 transition-all duration-300 w-full sm:w-auto cursor-pointer"
             aria-label="Download Resume from Google Drive"
           >
             <FiDownload />

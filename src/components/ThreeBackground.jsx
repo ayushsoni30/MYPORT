@@ -37,9 +37,9 @@ export default function ThreeBackground() {
       
       const gradient = ctx.createRadialGradient(16, 16, 0, 16, 16, 16)
       gradient.addColorStop(0, 'rgba(255, 255, 255, 1)')
-      gradient.addColorStop(0.2, 'rgba(147, 51, 234, 0.8)') // violet purple glow
-      gradient.addColorStop(0.6, 'rgba(59, 130, 246, 0.2)') // blue glow
-      gradient.addColorStop(1, 'rgba(59, 130, 246, 0)')
+      gradient.addColorStop(0.2, 'rgba(200, 200, 200, 0.8)') // silver glow
+      gradient.addColorStop(0.6, 'rgba(100, 100, 100, 0.25)') // dark grey glow
+      gradient.addColorStop(1, 'rgba(200, 200, 200, 0)')
       
       ctx.fillStyle = gradient
       ctx.fillRect(0, 0, 32, 32)
@@ -109,10 +109,14 @@ export default function ThreeBackground() {
     const positions = new Float32Array(particleCount * 3)
     const colors = new Float32Array(particleCount * 3)
     
-    // Copy initial hero positions
-    for (let i = 0; i < particleCount * 3; i++) {
-      positions[i] = posHero[i]
-      colors[i] = 1.0
+    // Copy initial hero positions and color them Gold
+    for (let i = 0; i < particleCount; i++) {
+      positions[i * 3] = posHero[i * 3]
+      positions[i * 3 + 1] = posHero[i * 3 + 1]
+      positions[i * 3 + 2] = posHero[i * 3 + 2]
+      colors[i * 3] = 0.83
+      colors[i * 3 + 1] = 0.65
+      colors[i * 3 + 2] = 0.45
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
@@ -186,6 +190,8 @@ export default function ThreeBackground() {
         z: 0
       }
 
+      const isMono = typeof document !== 'undefined' && document.documentElement.classList.contains('mono')
+
       // Interpolate positions and colors based on Scroll percentage
       for (let i = 0; i < particleCount; i++) {
         let x1, y1, z1, x2, y2, z2
@@ -199,26 +205,41 @@ export default function ThreeBackground() {
           x1 = posHero[i * 3]; y1 = posHero[i * 3 + 1]; z1 = posHero[i * 3 + 2]
           x2 = posAbout[i * 3]; y2 = posAbout[i * 3 + 1]; z2 = posAbout[i * 3 + 2]
 
-          r1 = 0.23; g1 = 0.51; b1 = 0.96 // Electric Blue (#3b82f6)
-          r2 = 0.85; g2 = 0.27; b2 = 0.94 // Cyber Magenta (#d946ef)
+          if (isMono) {
+            r1 = 1.0; g1 = 1.0; b1 = 1.0 // Silver White
+            r2 = 0.5; g2 = 0.5; b2 = 0.5 // Grey
+          } else {
+            r1 = 0.83; g1 = 0.65; b1 = 0.45 // Neon Gold
+            r2 = 1.0; g2 = 0.55; b2 = 0.26 // Neon Orange
+          }
         } else if (scrollPercent < 0.66) {
           // About/Skills (Terrain) to Experience/Projects (Vortex)
           t = (scrollPercent - 0.33) / 0.33
           
           x1 = posAbout[i * 3]; y1 = posAbout[i * 3 + 1]; z1 = posAbout[i * 3 + 2]
           x2 = posProjects[i * 3]; y2 = posProjects[i * 3 + 1]; z2 = posProjects[i * 3 + 2]
-
-          r1 = 0.85; g1 = 0.27; b1 = 0.94 // Cyber Magenta (#d946ef)
-          r2 = 0.02; g2 = 0.71; b2 = 0.83 // Cyber Cyan (#06b6d4)
+ 
+          if (isMono) {
+            r1 = 0.5; g1 = 0.5; b1 = 0.5 // Grey
+            r2 = 0.3; g2 = 0.3; b2 = 0.3 // Dark Grey
+          } else {
+            r1 = 1.0; g1 = 0.55; b1 = 0.26 // Neon Orange
+            r2 = 1.0; g2 = 0.42; b2 = 0.29 // Coral
+          }
         } else {
           // Experience/Projects (Vortex) to Contact (Chaos)
           t = Math.min((scrollPercent - 0.66) / 0.34, 1.0)
           
           x1 = posProjects[i * 3]; y1 = posProjects[i * 3 + 1]; z1 = posProjects[i * 3 + 2]
           x2 = posContact[i * 3]; y2 = posContact[i * 3 + 1]; z2 = posContact[i * 3 + 2]
-
-          r1 = 0.02; g1 = 0.71; b1 = 0.83 // Cyber Cyan (#06b6d4)
-          r2 = 0.85; g2 = 0.85; b2 = 0.92 // Silver Grey
+ 
+          if (isMono) {
+            r1 = 0.3; g1 = 0.3; b1 = 0.3 // Dark Grey
+            r2 = 1.0; g2 = 1.0; b2 = 1.0 // Silver White
+          } else {
+            r1 = 1.0; g1 = 0.42; b1 = 0.29 // Coral
+            r2 = 0.83; g2 = 0.65; b2 = 0.45 // Neon Gold
+          }
         }
 
         // Apply LERP transition
@@ -285,7 +306,7 @@ export default function ThreeBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 w-full h-full pointer-events-none z-[-1] bg-[#0b1120]"
+      className="fixed inset-0 w-full h-full pointer-events-none z-[-1] bg-[#0F0A08]"
       style={{ mixBlendMode: 'screen' }}
     />
   )

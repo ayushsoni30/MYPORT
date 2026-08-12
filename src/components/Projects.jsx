@@ -1,6 +1,9 @@
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { FiGithub, FiExternalLink } from 'react-icons/fi'
+import hirecoreImg from '../assets/hirecoreos.png'
+import quiziiImg from '../assets/quizii.png'
+import zeninImg from '../assets/zenin.png'
 
 const PROJECTS = [
   {
@@ -12,6 +15,7 @@ const PROJECTS = [
     demoUrl: 'https://zenin-tech-ai.vercel.app/',
     githubUrl: 'https://github.com/ayushsoni30/ZENIN--TECH--AI',
     comingSoon: false,
+    image: zeninImg,
     // Custom SVG-like component graphic for card
     graphic: (
       <div className="w-full h-full bg-[#0a0f1d] flex flex-col p-4 font-mono text-[10px] text-text-muted justify-between select-none">
@@ -42,6 +46,7 @@ const PROJECTS = [
     demoUrl: 'https://quizii-by-ayush.vercel.app/',
     githubUrl: 'https://github.com/ayushsoni30/Quizii-by-Ayush',
     comingSoon: false,
+    image: quiziiImg,
     graphic: (
       <div className="w-full h-full bg-[#0a0f1d] flex flex-col p-4 font-sans text-xs text-text-muted justify-between select-none">
         <div className="flex items-center justify-between border-b border-border-dark pb-2 mb-2">
@@ -70,25 +75,26 @@ const PROJECTS = [
     ),
   },
   {
-    title: 'Career Buddy — AI Career Assistant',
-    badges: ['AI POWERED'],
+    title: 'HireCoreOS — AI Recruitment & Career OS',
+    badges: ['AI POWERED', 'FEATURED'],
     description:
-      'An AI-powered career guidance assistant that helps students and developers discover personalized career paths, identify skill gaps, and receive intelligent learning roadmap recommendations through conversational AI.',
+      'An AI-powered recruitment and career guidance platform that helps candidates map their career pathways, identify skill gaps, and dynamically generates learning roadmaps using advanced LLM integrations.',
     tech: ['React.js', 'Node.js', 'MongoDB', 'Express.js', 'Tailwind CSS', 'AI API'],
-    demoUrl: '#',
-    githubUrl: 'https://github.com/ayushsoni30/careerbuddy',
-    comingSoon: true,
+    demoUrl: 'https://hirecore.localplayer.dev/landing',
+    githubUrl: 'https://github.com/ayushsoni30/HireCoreOS',
+    comingSoon: false,
+    image: hirecoreImg,
     graphic: (
-      <div className="w-full h-full bg-[#0a0f1d] flex flex-col p-4 font-sans text-xs text-text-muted justify-between select-none">
+      <div className="w-full h-full bg-[#030303] flex flex-col p-4 font-sans text-xs text-text-muted justify-between select-none">
         <div className="flex items-center gap-1.5 border-b border-border-dark pb-2 mb-2">
           <div className="w-2.5 h-2.5 rounded-full bg-secondary" />
-          <span className="text-white font-bold font-display">Career Buddy Roadmap</span>
+          <span className="text-white font-bold font-display">HireCoreOS Roadmap</span>
         </div>
         <div className="grow flex items-center justify-center relative">
           {/* Mock Node Map */}
           <div className="flex items-center gap-4 z-10">
             <div className="bg-primary/20 border border-primary text-white px-2.5 py-1.5 rounded-lg text-[10px] font-semibold">
-              Frontend Baselen
+              Frontend Baseline
             </div>
             <div className="text-secondary font-bold font-mono">→</div>
             <div className="bg-card-dark border border-border-dark text-text-muted px-2.5 py-1.5 rounded-lg text-[10px]">
@@ -98,78 +104,108 @@ const PROJECTS = [
           <div className="absolute w-2/3 h-0.5 bg-border-dark" />
         </div>
         <div className="mt-2 text-center text-secondary text-[9px] border-t border-border-dark pt-1.5 font-bold">
-          • Interactive Roadmaps •
+          • AI Automated Pathways •
         </div>
       </div>
     ),
   },
 ]
 
-function ProjectCard({ project, cardVariants }) {
+function ProjectCard({ project, idx, cardVariants, isHovered, isAnyHovered }) {
   const cardRef = useRef(null)
+  const [imgFailed, setImgFailed] = useState(false)
+  const [offsets, setOffsets] = useState({ x: 0, y: 0 })
+  const [isMobile, setIsMobile] = useState(false)
 
-  const handleMouseMove = (e) => {
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  useEffect(() => {
+    const card = cardRef.current
+    if (isHovered && card) {
+      const rect = card.getBoundingClientRect()
+      const cardCenterX = rect.left + rect.width / 2
+      const cardCenterY = rect.top + rect.height / 2
+      const viewportCenterX = window.innerWidth / 2
+      const viewportCenterY = window.innerHeight / 2
+      
+      setOffsets({
+        x: viewportCenterX - cardCenterX,
+        y: viewportCenterY - cardCenterY
+      })
+    } else {
+      setOffsets({ x: 0, y: 0 })
+    }
+  }, [isHovered])
+
+  const handleSpotlightMove = (e) => {
     const card = cardRef.current
     if (!card) return
-
     const rect = card.getBoundingClientRect()
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
-
-    const centerX = rect.width / 2
-    const centerY = rect.height / 2
-
-    // Calculate rotation (-1 to 1 scale)
-    const rotateX = -((y - centerY) / centerY) * 10 // max 10 degrees
-    const rotateY = ((x - centerX) / centerX) * 10 // max 10 degrees
-
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`
-    card.style.borderColor = '#3b82f6'
-    card.style.boxShadow = '0 20px 40px rgba(59, 130, 246, 0.18)'
     card.style.setProperty('--spotlight-x', `${x}px`)
     card.style.setProperty('--spotlight-y', `${y}px`)
   }
 
-  const handleMouseLeave = () => {
-    const card = cardRef.current
-    if (!card) return
-
-    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)'
-    card.style.borderColor = 'var(--border-dark)'
-    card.style.boxShadow = 'none'
-  }
-
   return (
     <motion.div
+      id={`project-card-${idx}`}
       ref={cardRef}
       variants={cardVariants}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="bg-card-dark border border-border-dark rounded-2xl overflow-hidden shadow-2xl flex flex-col h-full group transition-all duration-300 ease-out origin-center transform-gpu relative"
+      onMouseMove={handleSpotlightMove}
+      style={{
+        zIndex: isHovered ? 100 : 10,
+        transform: isHovered 
+          ? `translate(${offsets.x}px, ${offsets.y}px) scale(${isMobile ? 1.02 : 1.15})` 
+          : 'translate(0px, 0px) scale(1)',
+        boxShadow: isHovered 
+          ? '0 25px 60px rgba(255, 140, 66, 0.85), 0 0 100px rgba(212, 165, 116, 0.6)'
+          : 'none',
+        borderColor: isHovered ? 'var(--primary)' : 'var(--border-dark)',
+        transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease, filter 0.4s ease',
+      }}
+      className={`bg-card-dark border-2 rounded-2xl overflow-hidden shadow-2xl flex flex-col h-full group origin-center transform-gpu relative ${
+        isAnyHovered && !isHovered ? 'blur-[3px] scale-[0.94] opacity-25 pointer-events-none' : ''
+      }`}
     >
       {/* Spotlight Hover Glow Overlay */}
       <div
         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"
         style={{
-          background: `radial-gradient(320px circle at var(--spotlight-x, 0px) var(--spotlight-y, 0px), rgba(96, 165, 250, 0.08), transparent 80%)`,
+          background: `radial-gradient(320px circle at var(--spotlight-x, 0px) var(--spotlight-y, 0px), rgba(249, 115, 22, 0.06), transparent 80%)`,
         }}
       />
 
       {/* Simulated Graphic Container with Image Zoom effect on hover */}
-      <div className="h-48 border-b border-border-dark overflow-hidden relative z-10">
-        <div className="w-full h-full transition-transform duration-500 group-hover:scale-105">
-          {project.graphic}
+      <div className="h-48 border-b border-border-dark overflow-hidden relative z-10 bg-black/20">
+        <div className="w-full h-full transition-transform duration-500 group-hover:scale-105 flex items-center justify-center">
+          {project.image && !imgFailed ? (
+            <img 
+              src={project.image} 
+              alt={project.title} 
+              className="w-full h-full object-cover" 
+              onError={() => setImgFailed(true)}
+            />
+          ) : (
+            project.graphic
+          )}
         </div>
       </div>
 
       {/* Project Card Content */}
       <div className="p-6 flex flex-col grow text-left relative z-10">
-        {/* Badges */}
         <div className="flex flex-wrap gap-1.5 mb-3">
           {project.badges.map((badge, bIdx) => (
             <span
               key={bIdx}
-              className="font-sans text-[10px] font-bold tracking-wider px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20"
+              className="font-sans text-[10px] font-bold tracking-wider px-2 py-0.5 badge-tag-neon"
             >
               {badge}
             </span>
@@ -177,6 +213,7 @@ function ProjectCard({ project, cardVariants }) {
         </div>
 
         <h3 className="font-display font-bold text-xl text-text-light mb-3 group-hover:text-primary transition-colors duration-200">
+          <span className="font-mono text-sm text-primary mr-2 font-medium">[{String(idx + 1).padStart(2, '0')}]</span>
           {project.title}
         </h3>
 
@@ -201,7 +238,7 @@ function ProjectCard({ project, cardVariants }) {
           {project.comingSoon ? (
             <button
               disabled
-              className="flex items-center justify-center gap-1.5 bg-gray-700/50 text-gray-500 font-sans text-xs font-semibold px-4 py-2.5 rounded-xl border border-gray-700 cursor-not-allowed w-1/2"
+              className="flex items-center justify-center gap-1.5 bg-gray-700/50 text-gray-500 font-sans text-xs font-semibold px-4 py-2.5 border border-gray-700 cursor-not-allowed w-1/2"
               aria-label="Live demo disabled"
             >
               <FiExternalLink />
@@ -212,7 +249,7 @@ function ProjectCard({ project, cardVariants }) {
               href={project.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-1.5 bg-primary hover:bg-primary/90 text-white font-sans text-xs font-semibold px-4 py-2.5 rounded-xl transition-all duration-300 w-1/2 shadow-md hover:shadow-[0_0_10px_rgba(59,130,246,0.3)]"
+              className="flex items-center justify-center gap-1.5 btn-primary-neon text-xs px-4 py-2.5 w-1/2 cursor-pointer"
               aria-label="Live Demo"
             >
               <FiExternalLink />
@@ -224,7 +261,7 @@ function ProjectCard({ project, cardVariants }) {
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-1.5 border border-border-dark hover:border-text-light text-text-muted hover:text-text-light font-sans text-xs font-semibold px-4 py-2.5 rounded-xl bg-bg-dark/40 hover:bg-bg-dark/80 transition-all duration-300 w-1/2"
+            className="flex items-center justify-center gap-1.5 btn-secondary-neon text-xs px-4 py-2.5 w-1/2 cursor-pointer"
             aria-label="GitHub Repository"
           >
             <FiGithub />
@@ -237,6 +274,61 @@ function ProjectCard({ project, cardVariants }) {
 }
 
 export default function Projects() {
+  const [hoveredIdx, setHoveredIdx] = useState(null)
+
+  useEffect(() => {
+    if (hoveredIdx === null) return
+
+    document.body.classList.add('projects-card-hovered')
+
+    const handleGlobalMouseMove = (e) => {
+      const wrapper = document.getElementById(`project-wrapper-${hoveredIdx}`)
+      const card = document.getElementById(`project-card-${hoveredIdx}`)
+      if (!wrapper || !card) return
+
+      const wrapperRect = wrapper.getBoundingClientRect()
+      const cardRect = card.getBoundingClientRect()
+
+      const pad = 10
+
+      // Check if mouse is inside wrapper
+      const insideWrapper = 
+        e.clientX >= wrapperRect.left - pad &&
+        e.clientX <= wrapperRect.right + pad &&
+        e.clientY >= wrapperRect.top - pad &&
+        e.clientY <= wrapperRect.bottom + pad
+
+      // Check if mouse is inside centered card
+      const insideCard = 
+        e.clientX >= cardRect.left - pad &&
+        e.clientX <= cardRect.right + pad &&
+        e.clientY >= cardRect.top - pad &&
+        e.clientY <= cardRect.bottom + pad
+
+      // If mouse is outside BOTH, we hover out!
+      if (!insideWrapper && !insideCard) {
+        setHoveredIdx(null)
+      }
+    }
+
+    const handleScroll = () => {
+      setHoveredIdx(null)
+    }
+
+    const timer = setTimeout(() => {
+      window.addEventListener('mousemove', handleGlobalMouseMove)
+    }, 100)
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('mousemove', handleGlobalMouseMove)
+      window.removeEventListener('scroll', handleScroll)
+      document.body.classList.remove('projects-card-hovered')
+    }
+  }, [hoveredIdx])
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -286,14 +378,28 @@ export default function Projects() {
 
         {/* Project Grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 relative"
+          style={{ zIndex: hoveredIdx !== null ? 40 : 1 }}
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
         >
           {PROJECTS.map((project, idx) => (
-            <ProjectCard key={idx} project={project} cardVariants={cardVariants} />
+            <div
+              key={idx}
+              id={`project-wrapper-${idx}`}
+              className="h-full relative"
+              onMouseEnter={() => setHoveredIdx(idx)}
+            >
+              <ProjectCard 
+                idx={idx} 
+                project={project} 
+                cardVariants={cardVariants} 
+                isHovered={hoveredIdx === idx}
+                isAnyHovered={hoveredIdx !== null}
+              />
+            </div>
           ))}
         </motion.div>
 
@@ -309,7 +415,7 @@ export default function Projects() {
             href="https://github.com/ayushsoni30"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full max-w-md py-4 border border-primary text-primary hover:bg-primary hover:text-white font-sans font-bold text-center rounded-xl transition-all duration-300 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)] flex items-center justify-center gap-2 group"
+            className="w-full max-w-md py-4 btn-secondary-neon text-center flex items-center justify-center gap-2 group cursor-pointer"
           >
             View All Projects on GitHub
             <span className="group-hover:translate-x-1.5 transition-transform duration-200">→</span>

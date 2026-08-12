@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion'
+import { FiAward, FiCode, FiTerminal } from 'react-icons/fi'
 
 const CERTIFICATIONS = [
   {
-    icon: '🎓',
+    icon: FiAward,
     title: 'Complete Web Development Course',
     platform: 'Udemy',
     issued: 'March 21, 2026',
@@ -11,7 +12,7 @@ const CERTIFICATIONS = [
     badge: 'COMPLETED',
   },
   {
-    icon: '💻',
+    icon: FiCode,
     title: 'Python Programming',
     platform: 'Microsoft × Skill India Digital Hub (NSDC)',
     issued: 'Aug 13, 2025',
@@ -20,7 +21,7 @@ const CERTIFICATIONS = [
     badge: 'COMPLETED',
   },
   {
-    icon: '🐍',
+    icon: FiTerminal,
     title: 'Python Training',
     platform: 'NextOlive',
     issued: 'During Training Period',
@@ -84,7 +85,7 @@ export default function Certifications() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="max-w-3xl mx-auto mb-12 bg-card-dark border border-border-dark p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl hover:border-primary/50 transition-all duration-300"
+          className="max-w-3xl mx-auto mb-12 bg-card-dark border-2 border-border-dark p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl hover:border-primary/80 transition-all duration-300 hover:shadow-[0_0_25px_rgba(255,140,66,0.3)]"
         >
           <div className="text-left">
             <span className="font-sans text-[10px] font-bold tracking-widest text-secondary uppercase bg-secondary/10 px-3 py-1 rounded-full border border-secondary/20">
@@ -97,8 +98,8 @@ export default function Certifications() {
               Deep-diving into Prompt Engineering, RAG Pipelines, and AI Agents to build intelligent tools.
             </p>
           </div>
-          <div className="pulse-badge bg-green-500/10 text-green-400 border border-green-500/20 font-sans text-xs font-bold tracking-wider px-4 py-2 rounded-full flex items-center gap-2 shrink-0 select-none">
-            <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-ping" />
+          <div className="pulse-badge bg-primary/10 text-primary border border-primary/20 font-sans text-xs font-bold tracking-wider px-4 py-2 rounded-full flex items-center gap-2 shrink-0 select-none">
+            <span className="w-2.5 h-2.5 rounded-full bg-primary animate-ping" />
             Learning GenAI
           </div>
         </motion.div>
@@ -115,16 +116,16 @@ export default function Certifications() {
             <motion.div
               key={idx}
               variants={cardVariants}
-              whileHover={{ y: -6, borderColor: '#3b82f6' }}
+              whileHover={{ y: -6, borderColor: 'rgba(255, 140, 66, 0.95)' }}
               transition={{ duration: 0.3 }}
-              className="bg-card-dark border border-border-dark p-6 md:p-8 rounded-2xl shadow-xl flex flex-col text-left justify-between h-full transition-all duration-300 hover:shadow-[0_10px_25px_rgba(59,130,246,0.1)] group"
+              className="bg-card-dark border-2 border-border-dark p-6 md:p-8 rounded-2xl shadow-xl flex flex-col text-left justify-between h-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(255, 140, 66, 0.5),_0_0_50px_rgba(212, 165, 116, 0.25)] group"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-4xl bg-bg-dark p-3 rounded-xl border border-border-dark group-hover:scale-110 transition-transform duration-300">
-                    {cert.icon}
+                  <span className="text-4xl bg-bg-dark p-3 rounded-xl border border-border-dark group-hover:scale-110 transition-transform duration-300 text-primary flex items-center justify-center">
+                    <cert.icon />
                   </span>
-                  <span className="font-sans text-[10px] font-bold tracking-wider px-2.5 py-0.5 rounded bg-green-500/10 text-green-400 border border-green-500/20">
+                  <span className="font-sans text-[10px] font-bold tracking-wider px-2.5 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 badge-tag-neon">
                     {cert.badge}
                   </span>
                 </div>

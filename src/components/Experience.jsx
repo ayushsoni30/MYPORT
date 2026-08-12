@@ -5,7 +5,7 @@ const EXPERIENCES = [
     role: 'Frontend Developer Intern',
     company: 'Sysslan IT Solutions',
     duration: 'May 2026 – July 2026',
-    type: '🟢 Remote',
+    type: 'Remote',
     badge: 'completed',
     highlights: [
       'Built a responsive Event Ticket Booking System using HTML, CSS, and JavaScript with reusable UI components and structured page layouts.',
@@ -17,7 +17,7 @@ const EXPERIENCES = [
     role: 'Python Developer Trainee',
     company: 'NextOlive',
     duration: '6 Weeks',
-    type: '🔵 Remote | Training',
+    type: 'Remote | Training',
     badge: 'training',
     highlights: [
       'Gained hands-on experience in Python — OOP, data structures, file handling, and modular application development.',
@@ -70,7 +70,7 @@ export default function Experience() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.6, delay: idx * 0.15 }}
-                className="bg-card-dark border border-border-dark p-6 md:p-8 rounded-2xl shadow-xl transition-all duration-300 hover:shadow-[0_10px_25px_rgba(59,130,246,0.1)] hover:border-primary/50"
+                className="bg-card-dark border-2 border-border-dark p-6 md:p-8 rounded-2xl shadow-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,140,66,0.5),_0_0_50px_rgba(212,165,116,0.25)] hover:border-primary/80"
               >
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4">
                   <div>
@@ -85,14 +85,15 @@ export default function Experience() {
                     <span className="font-sans text-xs bg-bg-dark border border-border-dark text-text-muted px-3 py-1 rounded-full">
                       {exp.duration}
                     </span>
-                    <span className="font-sans text-xs bg-bg-dark border border-border-dark text-text-light px-3 py-1 rounded-full flex items-center gap-1">
+                    <span className="font-sans text-xs bg-bg-dark border border-border-dark text-text-light px-3 py-1 rounded-full flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                       {exp.type}
                     </span>
                     {exp.badge && (
-                      <span className={`font-sans text-xs px-3 py-1 rounded-full font-semibold uppercase tracking-wider ${
+                      <span className={`font-sans text-xs px-3 py-1 rounded-full font-semibold uppercase tracking-wider badge-tag-neon ${
                         exp.badge === 'completed' 
-                          ? 'bg-green-500/10 text-green-400 border border-green-500/20' 
-                          : 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
+                          ? 'bg-primary/10 text-primary border border-primary/20' 
+                          : 'bg-secondary/10 text-secondary border border-secondary/20'
                       }`}>
                         {exp.badge}
                       </span>
