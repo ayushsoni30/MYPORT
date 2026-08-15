@@ -111,7 +111,7 @@ export default function Hero() {
               <FiArrowRight className="group-hover:translate-x-1 transition-transform duration-200" />
             </a>
             <a
-              href="https://drive.google.com/file/d/1GtcM5X_tLoRk3gyO2ME3ddVqIebXMZUO/view?usp=drivesdk"
+              href="https://drive.google.com/file/d/1U_oakoAO7LuPefdH9XLJZ_XrJTk3hSpL/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 btn-secondary-neon text-sm md:text-base px-8 py-3.5 group cursor-pointer"

@@ -149,7 +149,7 @@ export default function Contact() {
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <a
-            href="https://drive.google.com/file/d/1rDK1SqpkNtg-_5OPk1mGV4hyliJLRHhH/view?usp=sharing"
+            href="https://drive.google.com/file/d/1U_oakoAO7LuPefdH9XLJZ_XrJTk3hSpL/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 btn-primary-neon text-sm md:text-base px-8 py-4 transition-all duration-300 w-full sm:w-auto cursor-pointer"
@@ -159,7 +159,7 @@ export default function Contact() {
             View Resume
           </a>
           <a
-            href="https://drive.google.com/file/d/1rDK1SqpkNtg-_5OPk1mGV4hyliJLRHhH/view?usp=sharing"
+            href="https://drive.google.com/file/d/1U_oakoAO7LuPefdH9XLJZ_XrJTk3hSpL/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 btn-secondary-neon text-sm md:text-base px-8 py-4 transition-all duration-300 w-full sm:w-auto cursor-pointer"
