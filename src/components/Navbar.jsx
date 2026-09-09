@@ -1,72 +1,54 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FiMenu, FiX, FiSearch, FiGithub, FiLinkedin, FiSun, FiMoon } from 'react-icons/fi'
+import { FiMenu, FiX, FiSearch, FiArrowUpRight, FiFileText } from 'react-icons/fi'
 import { useLenis } from 'lenis/react'
 
-const PRIMARY_LINKS = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
+const NAV_LINKS = [
+  { label: 'ABOUT', href: '#about' },
+  { label: 'PROJECTS', href: '#projects' },
+  { label: 'BENCHMARKS', href: '#benchmarks' },
+  { label: 'STACK', href: '#skills' },
+  { label: 'EXPERIENCE', href: '#experience' },
 ]
 
 const ALL_SECTIONS = [
-  { id: 'home', label: 'Home', desc: 'Main banner and introduction' },
-  { id: 'about', label: 'About Me', desc: 'Short bio, path and career goals' },
-  { id: 'skills', label: 'Skills', desc: 'Languages, frameworks and tech stack' },
-  { id: 'experience', label: 'Experience', desc: 'Professional internships and roles' },
-  { id: 'projects', label: 'Projects', desc: 'Personal and academic builds' },
-  { id: 'achievements', label: 'Achievements', desc: 'Events, contests and coding milestones' },
-  { id: 'education', label: 'Education', desc: 'Degrees, schools and academics' },
-  { id: 'certifications', label: 'Certifications', desc: 'Courses and technical credentials' },
-  { id: 'contact', label: 'Contact', desc: 'Social channels and resume downloads' },
+  { id: 'home', label: 'OVERVIEW', desc: 'Main telemetry & engineer introduction' },
+  { id: 'about', label: 'ARCHITECTURE', desc: 'Core principles and 01-03 capabilities' },
+  { id: 'projects', label: 'DEPLOYED SYSTEMS', desc: 'Live production web apps and AI services' },
+  { id: 'benchmarks', label: 'BENCHMARKS', desc: 'Independent latency and performance metrics' },
+  { id: 'skills', label: 'TECH STACK', desc: 'Languages, frameworks, and infrastructure matrix' },
+  { id: 'experience', label: 'EXPERIENCE', desc: 'Professional timeline and internship history' },
+  { id: 'education', label: 'EDUCATION', desc: 'B.Tech CSE (AI & ML) academic credentials' },
+  { id: 'certifications', label: 'CREDENTIALS', desc: 'Verified certifications & specializations' },
+  { id: 'contact', label: 'CONTACT', desc: 'Direct email, telephone, and social channels' },
 ]
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
   const [scrolled, setScrolled] = useState(false)
-  const [theme, setTheme] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') || 'warm'
-    }
-    return 'warm'
-  })
-
-  // Lenis Smooth Scroll instance
-  const lenis = useLenis()
-
+  
   // Command Palette State
   const [isPaletteOpen, setIsPaletteOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedIndex, setSelectedIndex] = useState(0)
   const searchInputRef = useRef(null)
 
-  // Track theme changes
-  useEffect(() => {
-    const root = document.documentElement
-    if (theme === 'mono') {
-      root.classList.add('mono')
-    } else {
-      root.classList.remove('mono')
-    }
-    localStorage.setItem('theme', theme)
-  }, [theme])
+  const lenis = useLenis()
 
-  // Track scroll position to change background styling
+  // Track scroll position
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
 
-      // Intersection tracker
       const scrollPosition = window.scrollY + 120
-      for (const link of ALL_SECTIONS) {
-        const el = document.getElementById(link.id)
+      for (const section of ALL_SECTIONS) {
+        const el = document.getElementById(section.id)
         if (el) {
           const top = el.offsetTop
           const height = el.offsetHeight
           if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(link.id)
+            setActiveSection(section.id)
           }
         }
       }
@@ -76,7 +58,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Keyboard shortcut listener for Command Palette (Ctrl+K or Cmd+K)
+  // Command Palette keyboard shortcut (Ctrl+K or Cmd+K)
   useEffect(() => {
     const handleKeyDown = (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
@@ -106,7 +88,7 @@ export default function Navbar() {
     setIsPaletteOpen(false)
     const el = document.getElementById(targetId)
     if (el) {
-      const offsetTop = el.offsetTop - 80 // Navbar offset
+      const offsetTop = el.offsetTop - 72
       if (lenis) {
         lenis.scrollTo(offsetTop)
       } else {
@@ -119,7 +101,6 @@ export default function Navbar() {
     }
   }
 
-  // Handle Command Palette arrow keys & enter selection
   const filteredSections = ALL_SECTIONS.filter((section) =>
     section.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
     section.desc.toLowerCase().includes(searchQuery.toLowerCase())
@@ -145,241 +126,196 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? 'bg-black/40 backdrop-blur-xl border-b border-white/10 py-3.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]'
-            : 'bg-transparent py-5'
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-150 border-b border-[#252525] ${
+          scrolled ? 'bg-[#0B0B0B]/95 backdrop-blur-md py-3.5' : 'bg-[#0B0B0B] py-4'
         }`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          {/* Brand Logo */}
+        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+          
+          {/* Brand Mark */}
           <div className="flex items-center gap-3">
             <a
               href="#home"
               onClick={(e) => handleScrollTo(e, 'home')}
-              className="font-display font-bold text-xl tracking-wider text-primary flex items-center gap-2 group cursor-pointer"
+              className="flex items-center gap-2.5 font-mono text-xs font-bold tracking-widest text-[#F2F2F0] hover:text-[#FF6900] transition-colors duration-150"
             >
-              <span className="bg-primary text-black w-7 h-7 flex items-center justify-center text-xs font-sans transition-transform duration-300 group-hover:rotate-12">
-                AS
-              </span>
-              <span className="text-text-light group-hover:text-primary transition-colors duration-200">
-                Ayush Soni
-              </span>
+              <span className="w-2 h-2 bg-[#FF6900]" />
+              <span>AYUSH SONI // SYS</span>
             </a>
-            <span className="hidden sm:inline-block font-mono text-[10px] bg-card-dark border border-border-dark text-text-muted px-2 py-0.5 select-none">
-              v1.0.0
+            <span className="hidden sm:inline-block font-mono text-[10px] text-[#555555] border-l border-[#252525] pl-3 select-none">
+              v2.0.0-PROD
             </span>
           </div>
 
-          {/* Center: Docs navigation & Search */}
-          <div className="hidden lg:flex items-center gap-6">
-            <nav className="flex items-center gap-6 border-r border-border-dark pr-6">
-              {PRIMARY_LINKS.map((link) => {
-                const sectionId = link.href.slice(1)
-                const isActive = activeSection === sectionId
-                return (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    onClick={(e) => handleScrollTo(e, sectionId)}
-                    className={`relative font-sans text-xs font-medium tracking-wide transition-colors duration-200 py-1 ${
-                      isActive ? 'text-primary' : 'text-text-muted hover:text-text-light'
-                    }`}
-                  >
-                    {link.label}
-                    {isActive && (
-                      <motion.span
-                        layoutId="activeUnderline"
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary shadow-[0_0_8px_#FF8C42]"
-                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                      />
-                    )}
-                  </a>
-                )
-              })}
-            </nav>
+          {/* Desktop Navigation Links (DESIGN.md Section 7) */}
+          <nav className="hidden lg:flex items-center gap-8">
+            {NAV_LINKS.map((link) => {
+              const targetId = link.href.slice(1)
+              const isActive = activeSection === targetId
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={(e) => handleScrollTo(e, targetId)}
+                  className={`font-mono text-xs tracking-[0.14em] uppercase transition-colors duration-150 py-1 ${
+                    isActive ? 'text-[#FF6900] font-semibold' : 'text-[#777777] hover:text-[#F2F2F0]'
+                  }`}
+                >
+                  {link.label}
+                </a>
+              )
+            })}
+          </nav>
 
-            {/* Docs Search Button Mockup */}
+          {/* Right Action Controls */}
+          <div className="hidden lg:flex items-center gap-3">
+            {/* Search Bar Button */}
             <button
               onClick={() => setIsPaletteOpen(true)}
-              className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-card-dark border border-border-dark hover:border-primary/50 text-text-muted hover:text-text-light font-sans text-xs transition-all duration-200 cursor-pointer select-none"
+              className="flex items-center gap-2 px-3 py-1.5 bg-[#111111] border border-[#252525] hover:border-[#303030] text-[#777777] hover:text-[#F2F2F0] font-mono text-xs transition-colors duration-150 cursor-pointer"
+              aria-label="Open Command Palette"
             >
-              <FiSearch className="text-sm text-text-muted" />
-              <span>Search sections...</span>
-              <kbd className="font-mono text-[9px] bg-bg-dark border border-border-dark px-1.5 py-0.5 rounded text-text-muted leading-none ml-2">
+              <FiSearch className="text-xs" />
+              <span>FIND</span>
+              <kbd className="text-[10px] bg-[#151515] border border-[#252525] px-1.5 py-0.2 rounded text-[#555555]">
                 ⌘K
               </kbd>
             </button>
-          </div>
 
-          {/* Right Controls: Socials & Theme Toggle */}
-          <div className="hidden lg:flex items-center gap-4">
+            {/* Outlined Resume Button */}
             <a
-              href="https://github.com/ayushsoni30"
+              href="https://drive.google.com/file/d/1NSBH94j34LY_SjHJsJv7tk_PZ33ooFAx/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-text-muted hover:text-primary text-lg transition-all duration-200 hover:scale-105 cursor-pointer"
-              aria-label="GitHub Profile"
+              className="btn-secondary text-xs py-1.5 px-4"
+              aria-label="View Resume"
             >
-              <FiGithub />
+              <FiFileText />
+              <span>RESUME</span>
             </a>
-            <button
-              onClick={() => setTheme(theme === 'warm' ? 'mono' : 'warm')}
-              className="text-text-muted hover:text-primary text-lg transition-all duration-200 hover:scale-105 cursor-pointer"
-              aria-label="Toggle Theme"
-            >
-              {theme === 'warm' ? <FiMoon /> : <FiSun />}
-            </button>
+
+            {/* Primary Pill Button (DESIGN.md Section 7 & 12) */}
             <a
-              href="https://www.linkedin.com/in/ayushsoni3030"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-text-muted hover:text-primary text-lg transition-all duration-200 hover:scale-105 cursor-pointer"
-              aria-label="LinkedIn Profile"
+              href="#contact"
+              onClick={(e) => handleScrollTo(e, 'contact')}
+              className="btn-primary text-xs py-1.5 px-5"
+              aria-label="Get Started / Contact"
             >
-              <FiLinkedin />
+              <span>GET IN TOUCH</span>
+              <FiArrowUpRight />
             </a>
           </div>
 
-          {/* Mobile controls */}
-          <div className="lg:hidden flex items-center gap-3">
+          {/* Mobile Menu & Search Trigger */}
+          <div className="lg:hidden flex items-center gap-2">
             <button
               onClick={() => setIsPaletteOpen(true)}
-              className="p-2 text-text-muted hover:text-primary cursor-pointer"
+              className="p-2 text-[#777777] hover:text-[#F2F2F0] cursor-pointer"
               aria-label="Search"
             >
-              <FiSearch size={20} />
+              <FiSearch size={18} />
             </button>
             <button
-              className="text-text-light hover:text-primary p-2 focus:outline-none cursor-pointer"
               onClick={() => setIsOpen(!isOpen)}
-              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              className="p-2 text-[#F2F2F0] hover:text-[#FF6900] cursor-pointer"
+              aria-label={isOpen ? 'Close Menu' : 'Open Menu'}
             >
-              {isOpen ? <FiX size={22} /> : <FiMenu size={22} />}
+              {isOpen ? <FiX size={20} /> : <FiMenu size={20} />}
             </button>
           </div>
+
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Navigation Dropdown */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="lg:hidden bg-bg-dark border-b border-border-dark overflow-hidden"
+              transition={{ duration: 0.2 }}
+              className="lg:hidden bg-[#0B0B0B] border-t border-[#252525] px-6 py-6"
             >
-              <div className="px-6 py-6 flex flex-col gap-5">
-                <div className="text-[11px] font-bold text-text-muted tracking-wider uppercase select-none">
-                  Navigation
-                </div>
-                <div className="grid grid-cols-2 gap-3">
-                  {ALL_SECTIONS.map((section) => {
-                    const isActive = activeSection === section.id
-                    return (
-                      <a
-                        key={section.id}
-                        href={`#${section.id}`}
-                        onClick={(e) => handleScrollTo(e, section.id)}
-                        className={`font-sans text-sm font-medium px-3 py-2 rounded-lg border transition-all duration-200 ${
-                          isActive
-                            ? 'bg-primary/10 text-primary border-primary/20'
-                            : 'bg-card-dark border-border-dark text-text-muted hover:text-text-light'
-                        }`}
-                      >
-                        {section.label}
-                      </a>
-                    )
-                  })}
-                </div>
-
-                <div className="border-t border-border-dark pt-4 flex items-center justify-between">
-                  <span className="text-xs text-text-muted">Follow & Theme:</span>
-                  <div className="flex gap-4 items-center">
-                    <a
-                      href="https://github.com/ayushsoni30"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-text-muted hover:text-primary text-xl cursor-pointer"
-                      aria-label="GitHub Profile"
-                    >
-                      <FiGithub />
-                    </a>
-                    <button
-                      onClick={() => setTheme(theme === 'warm' ? 'mono' : 'warm')}
-                      className="text-text-muted hover:text-primary text-xl cursor-pointer"
-                      aria-label="Toggle Theme"
-                    >
-                      {theme === 'warm' ? <FiMoon /> : <FiSun />}
-                    </button>
-                    <a
-                      href="https://www.linkedin.com/in/ayushsoni3030"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-text-muted hover:text-primary text-xl cursor-pointer"
-                      aria-label="LinkedIn Profile"
-                    >
-                      <FiLinkedin />
-                    </a>
-                  </div>
+              <div className="flex flex-col gap-3 text-left">
+                {ALL_SECTIONS.map((section) => (
+                  <a
+                    key={section.id}
+                    href={`#${section.id}`}
+                    onClick={(e) => handleScrollTo(e, section.id)}
+                    className="font-mono text-xs uppercase tracking-wider text-[#777777] hover:text-[#F2F2F0] py-2 border-b border-[#181818]"
+                  >
+                    {section.label}
+                  </a>
+                ))}
+                
+                <div className="pt-4 flex items-center justify-between">
+                  <a
+                    href="https://drive.google.com/file/d/1NSBH94j34LY_SjHJsJv7tk_PZ33ooFAx/view?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary text-xs py-2 px-4 w-1/2 justify-center"
+                  >
+                    RESUME
+                  </a>
+                  <a
+                    href="#contact"
+                    onClick={(e) => handleScrollTo(e, 'contact')}
+                    className="btn-primary text-xs py-2 px-4 w-1/2 justify-center ml-3"
+                  >
+                    CONTACT
+                  </a>
                 </div>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.header>
+      </header>
 
-      {/* Interactive Command Palette Modal */}
+      {/* Industrial Command Palette Modal */}
       <AnimatePresence>
         {isPaletteOpen && (
-          <div className="fixed inset-0 z-[100] flex items-start justify-center pt-[15vh]">
-            {/* Backdrop */}
+          <div className="fixed inset-0 z-100 flex items-start justify-center pt-[15vh] px-4">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsPaletteOpen(false)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+              className="fixed inset-0 bg-black/75"
             />
 
-            {/* Modal Box */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: -20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: -20 }}
-              transition={{ duration: 0.2 }}
-              className="relative w-full max-w-xl bg-card-dark border border-border-dark rounded-2xl neon-glow-border overflow-hidden mx-4 flex flex-col"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.15 }}
+              className="relative w-full max-w-xl bg-[#111111] border border-[#252525] rounded-[4px] shadow-2xl overflow-hidden flex flex-col z-10"
             >
-              {/* Search Header with Glow Focus */}
-              <div className="flex items-center gap-3 px-4 py-3.5 border-b border-border-dark/60 focus-within:border-primary/80 focus-within:shadow-[0_0_15px_rgba(255,140,66,0.25)] transition-all duration-200">
-                <FiSearch className="text-text-muted text-lg shrink-0" />
+              {/* Search Header */}
+              <div className="flex items-center gap-3 px-4 py-3.5 border-b border-[#252525]">
+                <FiSearch className="text-[#555555] text-sm shrink-0" />
                 <input
                   ref={searchInputRef}
                   type="text"
-                  placeholder="Type to search sections (e.g. projects, skills)..."
+                  placeholder="Navigate sections (projects, benchmarks, stack)..."
                   value={searchQuery}
                   onChange={(e) => {
                     setSearchQuery(e.target.value)
                     setSelectedIndex(0)
                   }}
                   onKeyDown={handlePaletteKeyDown}
-                  className="w-full bg-transparent border-0 outline-none text-text-light font-sans text-sm placeholder-text-muted/70 focus:ring-0"
+                  className="w-full bg-transparent outline-none text-[#F2F2F0] font-mono text-xs placeholder-[#555555]"
                 />
                 <button
                   onClick={() => setIsPaletteOpen(false)}
-                  className="text-[10px] bg-bg-dark border border-border-dark px-2 py-1 rounded text-text-muted hover:text-text-light shrink-0"
+                  className="font-mono text-[10px] text-[#555555] hover:text-[#F2F2F0] border border-[#252525] px-1.5 py-0.5"
                 >
                   ESC
                 </button>
               </div>
 
               {/* Search Results */}
-              <div className="max-h-[320px] overflow-y-auto p-2">
+              <div className="max-h-[300px] overflow-y-auto p-2">
                 {filteredSections.length > 0 ? (
                   filteredSections.map((section, index) => {
                     const isSelected = index === selectedIndex
@@ -388,52 +324,35 @@ export default function Navbar() {
                         key={section.id}
                         onClick={() => handleScrollTo(null, section.id)}
                         onMouseEnter={() => setSelectedIndex(index)}
-                        className={`flex flex-col gap-0.5 px-3 py-2.5 cursor-pointer transition-all duration-150 ${
-                          isSelected
-                            ? 'bg-primary text-black'
-                            : 'hover:bg-bg-dark text-text-light'
+                        className={`px-3 py-2.5 cursor-pointer text-left transition-colors duration-100 ${
+                          isSelected ? 'bg-[#151515] border-l-2 border-[#FF6900]' : 'hover:bg-[#141414]'
                         }`}
                       >
                         <div className="flex items-center justify-between">
-                          <span className="font-sans text-sm font-semibold tracking-wide">
+                          <span className="font-mono text-xs font-semibold text-[#F2F2F0]">
                             {section.label}
                           </span>
                           {isSelected && (
-                            <span className="font-mono text-[9px] bg-white/20 px-1.5 py-0.5 rounded leading-none">
-                              Jump to ↵
-                            </span>
+                            <span className="font-mono text-[10px] text-[#FF6900]">JUMP ↵</span>
                           )}
                         </div>
-                        <span
-                          className={`font-sans text-xs ${
-                            isSelected ? 'text-black/80' : 'text-text-muted'
-                          }`}
-                        >
+                        <div className="font-mono text-[11px] text-[#555555] mt-0.5">
                           {section.desc}
-                        </span>
+                        </div>
                       </div>
                     )
                   })
                 ) : (
-                  <div className="py-8 text-center font-sans text-sm text-text-muted">
-                    No sections matched your search.
+                  <div className="py-8 text-center font-mono text-xs text-[#555555]">
+                    No sections matched your query.
                   </div>
                 )}
               </div>
 
-              {/* Search Footer */}
-              <div className="px-4 py-2 bg-bg-dark/40 border-t border-border-dark flex items-center justify-between text-[10px] text-text-muted select-none">
-                <div className="flex items-center gap-3">
-                  <span>
-                    <kbd className="font-mono bg-bg-dark px-1.5 py-0.5 rounded border border-border-dark mr-1">↑↓</kbd>
-                    Navigate
-                  </span>
-                  <span>
-                    <kbd className="font-mono bg-bg-dark px-1.5 py-0.5 rounded border border-border-dark mr-1">Enter</kbd>
-                    Select
-                  </span>
-                </div>
-                <div>Ayush Soni Portfolio</div>
+              {/* Modal Footer */}
+              <div className="px-4 py-2 bg-[#0E0E0E] border-t border-[#252525] flex items-center justify-between font-mono text-[10px] text-[#555555]">
+                <span>NAVIGATE: ↑↓ • SELECT: ENTER</span>
+                <span>AS-PORTFOLIO // PROD</span>
               </div>
             </motion.div>
           </div>

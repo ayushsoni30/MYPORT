@@ -9,191 +9,145 @@ import {
   SiNodedotjs,
   SiExpress,
   SiMongodb,
-  SiJsonwebtokens,
-  SiAuth0,
   SiVercel,
-  SiNetlify,
-  SiGit,
-  SiGithub,
-  SiPostman,
-  SiJupyter,
-  SiStreamlit,
+  SiRender,
+  SiDocker,
+  SiFastapi,
 } from 'react-icons/si'
-import { DiCss3 } from 'react-icons/di'
-import { SiFastapi } from "react-icons/si";
-import { TbBrandVscode } from 'react-icons/tb'
-import { FiServer, FiShield } from 'react-icons/fi'
-import { DiMysql } from "react-icons/di";
-import { FaDocker } from "react-icons/fa";
-import { TbBinaryTree2 } from "react-icons/tb";
-import { MdArchitecture } from "react-icons/md";
-import { LuWorkflow } from "react-icons/lu";
-const SKILL_CATEGORIES = [
-  {
-    title: 'Languages',
-    skills: [
-      { name: 'JavaScript', icon: SiJavascript },
-      { name: 'TypeScript', icon: SiTypescript },
-      {
-  name: (
-    <>
-      Python <sub>[Pandas, NumPy, matplotlib]</sub>
-    </>
-  ),
-  icon: SiPython
-}
+import { DiCss3, DiMysql } from 'react-icons/di'
+import { FiCpu, FiTerminal } from 'react-icons/fi'
+import { LuWorkflow } from 'react-icons/lu'
+import { MdArchitecture } from 'react-icons/md'
 
-    ],
-  },
+const STACK_CATEGORIES = [
   {
-    title: 'Frontend',
+    title: 'LANGUAGES & RUNTIMES',
+    category: 'RUNTIME',
     skills: [
-      { name: 'React.js', icon: SiReact },
-      { name: 'Tailwind CSS', icon: SiTailwindcss },
-      { name: 'HTML5', icon: SiHtml5 },
-      { name: 'CSS3', icon: DiCss3 },
+      { name: 'JavaScript (ES6+)', icon: SiJavascript },
+      { name: 'TypeScript', icon: SiTypescript },
+      { name: 'Python 3', icon: SiPython },
+      { name: 'HTML5 Semantic', icon: SiHtml5 },
     ],
   },
   {
-    title: 'Backend',
+    title: 'FRONTEND ARCHITECTURE',
+    category: 'CLIENT',
+    skills: [
+      { name: 'React 18', icon: SiReact },
+      { name: 'Tailwind CSS', icon: SiTailwindcss },
+      { name: 'CSS3 / PostCSS', icon: DiCss3 },
+      { name: 'Framer Motion', icon: FiTerminal },
+    ],
+  },
+  {
+    title: 'BACKEND & SERVICES',
+    category: 'SERVER',
     skills: [
       { name: 'Node.js', icon: SiNodedotjs },
       { name: 'Express.js', icon: SiExpress },
-      { name: 'FASTapi', icon: SiFastapi  },
+      { name: 'FastAPI', icon: SiFastapi },
+      { name: 'RESTful Design', icon: MdArchitecture },
     ],
   },
   {
-    title: 'Database',
+    title: 'AI & LLM INTEGRATION',
+    category: 'INTELLIGENCE',
     skills: [
-  { name: 'MongoDB', icon: SiMongodb },
-  { name: 'SQL (Learning)', icon: DiMysql },
-]
-  },
-  {
-  title: 'Core CS',
-  skills: [
-    { name: 'OOP (Python)', icon: SiPython },
-{ name: 'Data Structures & Algorithms', icon: TbBinaryTree2 },
-    { name: 'System Design', icon: MdArchitecture },
-  ],
-},
-  {
-    title: 'Auth & Security',
-    skills: [
-      { name: 'JWT', icon: SiJsonwebtokens },
-      { name: 'Auth0', icon: SiAuth0 },
-      { name: 'bcrypt', icon: FiShield },
+      { name: 'Claude API (Anthropic)', icon: FiCpu },
+      { name: 'Prompt Engineering', icon: FiTerminal },
+      { name: 'RAG Workflows', icon: MdArchitecture },
+      { name: 'Context Optimization', icon: FiCpu },
     ],
   },
   {
-    title: 'Deployment',
+    title: 'DATA PERSISTENCE',
+    category: 'DATABASE',
     skills: [
-      { name: 'Vercel', icon: SiVercel },
-      { name: 'Render', icon: FiServer },
+      { name: 'MongoDB Atlas', icon: SiMongodb },
+      { name: 'Mongoose ODM', icon: SiMongodb },
+      { name: 'MySQL Relational', icon: DiMysql },
+      { name: 'Query Optimization', icon: MdArchitecture },
     ],
   },
   {
-  title: 'DevOps',
-  skills: [
-    { name: 'Docker', icon: FaDocker },
-    { name: 'CI/CD', icon: LuWorkflow },
-  ],
-},
-  {
-    title: 'Tools',
+    title: 'DEVOPS & CLOUD EDGE',
+    category: 'INFRA',
     skills: [
-      { name: 'Git', icon: SiGit },
-      { name: 'GitHub', icon: SiGithub },
-      { name: 'Postman', icon: SiPostman },
-      { name: 'VS Code', icon: TbBrandVscode },
-      { name: 'Jupyter', icon: SiJupyter },
-      { name: 'Streamlit', icon: SiStreamlit },
+      { name: 'Docker Containers', icon: SiDocker },
+      { name: 'CI/CD Pipelines', icon: LuWorkflow },
+      { name: 'Vercel Edge', icon: SiVercel },
+      { name: 'Render Cloud', icon: SiRender },
     ],
   },
 ]
 
 export default function Skills() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut',
-      },
-    },
-  }
-
   return (
-    <section id="skills" className="py-24 bg-bg-dark/50 relative overflow-hidden">
-      <div className="absolute top-1/3 left-1/4 w-75 h-75 bg-primary/5 rounded-full blur-[90px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <motion.div
-          className="max-w-3xl mx-auto text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="text-primary font-display font-medium tracking-widest text-sm uppercase">
-            My Toolbox
-          </span>
-          <h2 className="font-display font-bold text-3xl md:text-5xl text-text-light tracking-tight mt-2 mb-6">
-            Skills & Technologies
+    <section id="skills" className="py-24 border-b border-[#252525] bg-[#0B0B0B] relative">
+      <div className="px-6 md:px-12 max-w-7xl mx-auto">
+        
+        {/* Section Header */}
+        <div className="text-left mb-16">
+          <div className="eyebrow-label mb-3">
+            <span className="eyebrow-marker" />
+            <span>TECHNICAL MATRIX</span>
+          </div>
+          <h2 className="font-sans text-3xl md:text-5xl font-bold tracking-tight text-[#F2F2F0]">
+            Skills & Infrastructure Stack
           </h2>
-          <div className="h-1 w-20 bg-primary mx-auto rounded-full" />
-        </motion.div>
+          <p className="font-sans text-base md:text-lg text-[#777777] mt-3 max-w-2xl">
+            Core technologies and tools deployed across production web applications, database layers, and AI inference workflows.
+          </p>
+        </div>
 
-        {/* Skill Groups Grid */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-        >
-          {SKILL_CATEGORIES.map((category, idx) => (
+        {/* Technical Matrix Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {STACK_CATEGORIES.map((cat, idx) => (
             <motion.div
               key={idx}
-              variants={cardVariants}
-              className="bg-card-dark border border-border-dark p-6 rounded-2xl flex flex-col justify-start text-left shadow-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,140,66,0.2)]"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: idx * 0.05 }}
+              className="bg-[#111111] border border-[#252525] p-6 text-left hover:border-[#303030] transition-colors duration-180 flex flex-col justify-between"
             >
-              <h3 className="font-display font-semibold text-lg text-secondary mb-5 border-b border-border-dark/60 pb-2">
-                {category.title}
-              </h3>
-              <div className="grid grid-cols-2 gap-3">
-                {category.skills.map((skill, sIdx) => {
-                  const Icon = skill.icon
-                  return (
-                    <motion.div
-                      key={sIdx}
-                      whileHover={{ y: -4, borderColor: 'rgba(255, 140, 66, 0.85)' }}
-                      transition={{ duration: 0.2 }}
-                      className="bg-bg-dark border border-border-dark px-3 py-2.5 rounded-xl flex items-center gap-2.5 transition-all duration-300 hover:shadow-[0_0_12px_rgba(255,140,66,0.3)] group"
-                    >
-                      <Icon className="text-xl text-text-muted group-hover:text-primary transition-colors duration-200" />
-                      <span className="font-sans text-xs md:text-sm text-text-light group-hover:text-primary font-medium truncate">
-                        {skill.name}
-                      </span>
-                    </motion.div>
-                  )
-                })}
+              <div>
+                <div className="flex items-center justify-between border-b border-[#252525] pb-3 mb-4 font-mono text-[11px] text-[#555555]">
+                  <span className="text-[#FF6900] font-semibold">{cat.category}</span>
+                  <span>[{String(idx + 1).padStart(2, '0')}]</span>
+                </div>
+
+                <h3 className="font-mono text-xs font-bold text-[#F2F2F0] tracking-wider uppercase mb-5">
+                  {cat.title}
+                </h3>
+
+                <div className="space-y-2">
+                  {cat.skills.map((skill, sIdx) => {
+                    const Icon = skill.icon
+                    return (
+                      <div
+                        key={sIdx}
+                        className="flex items-center justify-between p-2 bg-[#151515] border border-[#202020] hover:border-[#303030] transition-colors duration-150"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <Icon className="text-sm text-[#777777]" />
+                          <span className="font-mono text-xs text-[#F2F2F0]">
+                            {skill.name}
+                          </span>
+                        </div>
+                        <span className="font-mono text-[9px] text-[#555555] uppercase">
+                          VERIFIED
+                        </span>
+                      </div>
+                    )
+                  })}
+                </div>
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
+
       </div>
     </section>
   )

@@ -6,134 +6,90 @@ const ACHIEVEMENTS = [
   {
     icon: LuTrophy,
     title: 'Runner-Up — Ingenuity 2k24 Hackathon',
-    badges: ['HACKATHON', '3rd / 25+ Teams'],
+    event: 'Ingenuity 2k24 / 25+ Teams',
+    metric: '3RD / 25+ TEAMS',
+    badge: 'HACKATHON',
     description:
-      'Secured 3rd place out of 25+ competing teams by developing a Recipe Finder web application using the MERN stack with step-by-step cooking instructions and detailed ingredient lists.',
-    feedId: 'CAM_03',
-    panelStyle: 'glass-panel-neon-gold',
+      'Secured 3rd place out of 25+ competing engineering teams by building a full-stack Recipe Finder web application using the MERN stack with step-by-step cooking pipelines and dynamic ingredient scaling.',
   },
   {
     icon: FiAward,
-    title: 'Runner-Up — CodeSprint',
-    institution: 'School of Management Sciences, Lucknow',
-    badges: ['COMPETITIVE PROGRAMMING'],
+    title: 'Runner-Up — CodeSprint Algorithm Challenge',
+    event: 'School of Management Sciences, Lucknow',
+    metric: '<25 MIN FINISH',
+    badge: 'SPEED CODING',
     description:
-      'Solved a complex programming challenge in under 25 minutes within a 1-hour time limit. Demonstrated strong problem-solving speed and accuracy under pressure.',
-    feedId: 'CAM_04',
-    panelStyle: 'glass-panel-neon-orange',
+      'Solved complex algorithmic challenges in under 25 minutes within a 60-minute time constraint. Demonstrated exceptional debugging velocity and algorithmic problem-solving under strict pressure.',
   },
 ]
 
 export default function Achievements() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
-  }
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut',
-      },
-    },
-  }
-
   return (
-    <section id="achievements" className="py-24 bg-bg-dark relative overflow-hidden">
-      {/* Background decoration grids */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b08_1px,transparent_1px),linear-gradient(to_bottom,#1e293b08_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
-
-      {/* Scattered Accent Dots */}
-      <div className="absolute top-1/4 right-12 accent-dot-neon" />
-      <div className="absolute bottom-1/3 left-12 accent-dot-neon" />
-
-      {/* Background decoration elements */}
-      <div className="absolute top-1/4 left-10 w-[200px] h-[200px] bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
-
-      <div className="max-w-5xl mx-auto px-6 relative z-10">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="text-secondary font-mono tracking-widest text-xs uppercase bg-secondary/10 px-3 py-1 rounded-full border border-secondary/20">
-            RECORDED_METRICS // MILESTONES
-          </span>
-          <h2 className="font-display font-bold text-3xl md:text-5xl text-text-light tracking-tight mt-4 mb-4">
-            Key Achievements
+    <section id="achievements" className="py-24 border-b border-[#252525] bg-[#0B0B0B] relative">
+      <div className="px-6 md:px-12 max-w-7xl mx-auto">
+        
+        {/* Section Header */}
+        <div className="text-left mb-16">
+          <div className="eyebrow-label mb-3">
+            <span className="eyebrow-marker" />
+            <span>MEASURED OUTCOMES</span>
+          </div>
+          <h2 className="font-sans text-3xl md:text-5xl font-bold tracking-tight text-[#F2F2F0]">
+            Hackathons & Coding Milestones
           </h2>
-          <div className="h-1 w-20 bg-primary mx-auto rounded-full" />
-        </motion.div>
+          <p className="font-sans text-base md:text-lg text-[#777777] mt-3 max-w-xl">
+            Competitive programming tournaments and hackathon recognitions verified under timed environments.
+          </p>
+        </div>
 
-        {/* Achievements Cards Grid */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-        >
-          {ACHIEVEMENTS.map((ach, idx) => (
-            <motion.div
-              key={idx}
-              variants={cardVariants}
-              className={`border-2 p-6 md:p-8 rounded-3xl shadow-xl flex flex-col text-left transition-all duration-300 relative overflow-hidden video-crt-overlay video-scanline hover:shadow-[0_0_30px_rgba(255,140,66,0.4)] group ${ach.panelStyle}`}
-            >
-              {/* Telemetry Header */}
-              <div className="flex items-center justify-between border-b border-border-dark/60 pb-3 mb-5 z-20 relative">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-red-500 blink-rec" />
-                  <span className="font-mono text-[9px] text-primary tracking-widest font-bold">REC [{ach.feedId}]</span>
-                </div>
-                <div className="text-[9px] font-mono text-text-muted">SIGNAL_OK // 29.97FPS</div>
-              </div>
+        {/* 2-Column Milestone Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {ACHIEVEMENTS.map((ach, idx) => {
+            const Icon = ach.icon
+            return (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
+                className="bg-[#111111] border border-[#252525] p-8 text-left hover:border-[#303030] transition-colors duration-180 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between border-b border-[#252525] pb-4 mb-6">
+                    <div className="flex items-center gap-2.5">
+                      <Icon className="text-[#FF6900] text-lg" />
+                      <span className="font-mono text-xs font-semibold text-[#F2F2F0]">
+                        {ach.badge}
+                      </span>
+                    </div>
+                    <span className="font-mono text-xs text-[#FF6900] border border-[#252525] px-2.5 py-0.5 bg-[#151515]">
+                      {ach.metric}
+                    </span>
+                  </div>
 
-              {/* Card Details */}
-              <div className="flex items-start gap-4 mb-4 relative z-20">
-                <span className="text-4xl bg-bg-dark/60 p-3 rounded-xl border border-border-dark group-hover:scale-110 transition-transform duration-300 text-primary flex items-center justify-center">
-                  <ach.icon />
-                </span>
-                <div className="flex-grow">
-                  <h3 className="font-display font-bold text-lg md:text-xl text-text-light group-hover:text-primary transition-colors duration-200">
+                  <h3 className="font-sans text-xl font-bold text-[#F2F2F0] mb-2">
                     {ach.title}
                   </h3>
-                  {ach.institution && (
-                    <p className="font-sans text-xs text-secondary mt-0.5 font-medium">
-                      {ach.institution}
-                    </p>
-                  )}
+
+                  <div className="font-mono text-xs text-[#777777] mb-4">
+                    {ach.event}
+                  </div>
+
+                  <p className="font-sans text-sm text-[#777777] leading-relaxed">
+                    {ach.description}
+                  </p>
                 </div>
-              </div>
 
-              {/* Badges */}
-              <div className="flex flex-wrap gap-1.5 mb-4 relative z-20">
-                {ach.badges.map((badge, bIdx) => (
-                  <span
-                    key={bIdx}
-                    className="font-sans text-[10px] font-bold tracking-wider px-2.5 py-0.5 badge-tag-neon"
-                  >
-                    {badge}
-                  </span>
-                ))}
-              </div>
+                <div className="mt-8 pt-4 border-t border-[#252525] font-mono text-[10px] text-[#555555] flex justify-between">
+                  <span>STATUS: VERIFIED RESULT</span>
+                  <span>RECORD: OFFICIAL</span>
+                </div>
+              </motion.div>
+            )
+          })}
+        </div>
 
-              <p className="font-sans text-sm md:text-base text-text-muted leading-relaxed relative z-20">
-                {ach.description}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
       </div>
     </section>
   )

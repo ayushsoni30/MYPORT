@@ -1,174 +1,132 @@
 import { motion } from 'framer-motion'
-import { FiMail, FiPhone, FiMapPin, FiGithub, FiLinkedin, FiFileText, FiDownload } from 'react-icons/fi'
+import { FiMail, FiPhone, FiMapPin, FiGithub, FiLinkedin, FiFileText, FiArrowUpRight } from 'react-icons/fi'
 
-const CONTACT_CARDS = [
+const CONTACT_POINTS = [
   {
     icon: FiMail,
-    title: 'Email',
+    label: 'PRIMARY EMAIL',
     value: 'ayushsoni55aa@gmail.com',
-    href: 'https://mail.google.com/mail/?view=cm&to=ayushsoni55aa@gmail.com', // ✅ updated
-    label: 'Open mail application',
+    href: 'https://mail.google.com/mail/?view=cm&to=ayushsoni55aa@gmail.com',
+    action: 'SEND EMAIL ↗',
   },
   {
     icon: FiPhone,
-    title: 'Phone',
+    label: 'TELEPHONE',
     value: '+91-8112987405',
     href: 'tel:+918112987405',
-    label: 'Open telephone dialer',
-  },
-  {
-    icon: FiMapPin,
-    title: 'Location',
-    value: 'Lucknow, India',
-    href: null,
-    label: 'Display location',
-  },
-  {
-    icon: FiGithub,
-    title: 'GitHub',
-    value: 'github.com/ayushsoni30',
-    href: 'https://github.com/ayushsoni30',
-    label: 'Visit GitHub profile',
+    action: 'DIAL ↗',
   },
   {
     icon: FiLinkedin,
-    title: 'LinkedIn',
+    label: 'LINKEDIN NETWORK',
     value: 'linkedin.com/in/ayushsoni3030',
     href: 'https://www.linkedin.com/in/ayushsoni3030',
-    label: 'Visit LinkedIn profile',
+    action: 'CONNECT ↗',
+  },
+  {
+    icon: FiGithub,
+    label: 'GITHUB PROFILE',
+    value: 'github.com/ayushsoni30',
+    href: 'https://github.com/ayushsoni30',
+    action: 'VIEW ORG ↗',
+  },
+  {
+    icon: FiMapPin,
+    label: 'BASE LOCATION',
+    value: 'Lucknow, Uttar Pradesh, India',
+    href: null,
+    action: 'TIMEZONE: IST (UTC+5:30)',
   },
 ]
 
 export default function Contact() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 25 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut',
-      },
-    },
-  }
-
   return (
-    <section id="contact" className="py-24 bg-bg-dark/50 relative overflow-hidden">
-      {/* Decorative Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-125 bg-primary/5 rounded-full blur-[130px] pointer-events-none" />
-
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="text-primary font-display font-medium tracking-widest text-sm uppercase">
-            Get In Touch
-          </span>
-          <h2 className="font-display font-bold text-3xl md:text-5xl text-text-light tracking-tight mt-2 mb-4">
-            Let's Connect
+    <section id="contact" className="py-24 border-b border-[#252525] bg-[#0B0B0B] relative">
+      <div className="px-6 md:px-12 max-w-7xl mx-auto">
+        
+        {/* Section Header */}
+        <div className="text-left mb-16">
+          <div className="eyebrow-label mb-3">
+            <span className="eyebrow-marker" />
+            <span>DIRECT INQUIRIES</span>
+          </div>
+          <h2 className="font-sans text-3xl md:text-5xl font-bold tracking-tight text-[#F2F2F0]">
+            Connect with Engineering
           </h2>
-          <p className="font-sans text-text-muted text-base md:text-lg max-w-xl mx-auto">
-            Open to internships, full-time roles, and exciting collaborations.
+          <p className="font-sans text-base md:text-lg text-[#777777] mt-3 max-w-xl">
+            Open for software engineering roles, full stack projects, and high-leverage technical collaborations.
           </p>
-          <div className="h-1 w-20 bg-primary mx-auto rounded-full mt-6" />
-        </motion.div>
+        </div>
 
-        {/* Contact Cards Grid */}
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-16"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-        >
-          {CONTACT_CARDS.map((card, idx) => {
-            const Icon = card.icon
-            const CardWrapper = card.href ? 'a' : 'div'
-            const props = card.href
-              ? {
-                  href: card.href,
-                  target: card.href.startsWith('http') ? '_blank' : undefined,
-                  rel: card.href.startsWith('http') ? 'noopener noreferrer' : undefined,
-                  'aria-label': card.label,
-                }
-              : {}
+        {/* Contact Points Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          {CONTACT_POINTS.map((point, idx) => {
+            const Icon = point.icon
+            const isClickable = Boolean(point.href)
+            const CardElement = isClickable ? 'a' : 'div'
 
             return (
               <motion.div
                 key={idx}
-                variants={cardVariants}
-                className="h-full"
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: idx * 0.05 }}
               >
-                <CardWrapper
-                  {...props}
-                  className={`bg-card-dark border-2 border-border-dark p-6 rounded-2xl flex flex-col items-center justify-center text-center shadow-lg transition-all duration-300 h-full grow block ${
-                    card.href
-                      ? 'hover:border-primary/80 hover:shadow-[0_0_30px_rgba(255,140,66,0.5),_0_0_50px_rgba(212,165,116,0.25)] cursor-pointer group'
-                      : 'cursor-default'
+                <CardElement
+                  href={point.href || undefined}
+                  target={isClickable && point.href?.startsWith('http') ? '_blank' : undefined}
+                  rel={isClickable && point.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className={`bg-[#111111] border border-[#252525] p-6 text-left flex flex-col justify-between h-full group transition-colors duration-180 block ${
+                    isClickable ? 'hover:border-[#303030] cursor-pointer' : 'cursor-default'
                   }`}
                 >
-                  <span className={`text-2xl bg-bg-dark p-4 rounded-full border border-border-dark mb-4 transition-colors duration-300 ${
-                    card.href ? 'group-hover:text-primary group-hover:border-primary/40' : ''
-                  }`}>
-                    <Icon />
-                  </span>
-                  <h3 className="font-display font-semibold text-base text-text-light mb-2">
-                    {card.title}
-                  </h3>
-                  <p className={`font-sans text-sm break-all font-medium transition-colors duration-200 ${
-                    card.href ? 'text-text-muted group-hover:text-primary' : 'text-text-muted'
-                  }`}>
-                    {card.value}
-                  </p>
-                </CardWrapper>
+                  <div>
+                    <div className="flex items-center justify-between border-b border-[#252525] pb-3 mb-4">
+                      <span className="font-mono text-[10px] text-[#555555] uppercase tracking-wider">
+                        {point.label}
+                      </span>
+                      <Icon className="text-sm text-[#777777] group-hover:text-[#FF6900] transition-colors duration-150" />
+                    </div>
+
+                    <div className="font-mono text-sm font-semibold text-[#F2F2F0] break-all mb-4">
+                      {point.value}
+                    </div>
+                  </div>
+
+                  <div className="pt-3 border-t border-[#252525] font-mono text-[11px] text-[#777777] flex items-center justify-between group-hover:text-[#F2F2F0] transition-colors duration-150">
+                    <span>{point.action}</span>
+                    {isClickable && <FiArrowUpRight />}
+                  </div>
+                </CardElement>
               </motion.div>
             )
           })}
-        </motion.div>
+        </div>
 
-        {/* Resume Actions */}
-        <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-6"
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        >
+        {/* Action Button Row */}
+        <div className="flex flex-wrap items-center justify-start gap-4 pt-8 border-t border-[#252525]">
+          <a
+            href="https://mail.google.com/mail/?view=cm&to=ayushsoni55aa@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary"
+          >
+            <span>SEND DIRECT EMAIL</span>
+            <FiArrowUpRight />
+          </a>
+
           <a
             href="https://drive.google.com/file/d/1NSBH94j34LY_SjHJsJv7tk_PZ33ooFAx/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 btn-primary-neon text-sm md:text-base px-8 py-4 transition-all duration-300 w-full sm:w-auto cursor-pointer"
-            aria-label="View Resume in Google Drive"
+            className="btn-secondary"
           >
             <FiFileText />
-            View Resume
+            <span>DOWNLOAD RESUME (PDF)</span>
           </a>
-          <a
-            href="https://drive.google.com/file/d/1NSBH94j34LY_SjHJsJv7tk_PZ33ooFAx/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 btn-secondary-neon text-sm md:text-base px-8 py-4 transition-all duration-300 w-full sm:w-auto cursor-pointer"
-            aria-label="Download Resume from Google Drive"
-          >
-            <FiDownload />
-            Download Resume
-          </a>
-        </motion.div>
+        </div>
+
       </div>
     </section>
   )
