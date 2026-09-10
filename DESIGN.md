@@ -189,14 +189,24 @@ The top navbar is removed. Two floating, fixed elements remain:
   each preceded by a short hairline tick that lengthens and turns orange for
   the active section (intersection-based). Labels hidden on mobile, ticks
   stay. Click → Lenis scroll to the section.
-- **GlassDock** — fixed bottom-center, `z-40`, a liquid-glass pill
-  (`@ybouane/liquidglass`) refracting the page behind it. Contains a
-  prominent filled Resume pill, then GitHub / LinkedIn / Email icons
-  (icon-only on mobile), a hairline divider, and the sun/moon theme toggle.
-  The App wrapper div is the LiquidGlass root; the dock is its only glass
-  child. Theme switch destroys + re-inits the liquid-glass instance so the
-  refracted scene refreshes with the new palette. `user-select` is restored
-  after init so page text remains selectable.
+- **GlassDock** — fixed bottom-center, `z-40`, an expanded black liquid-glass pill
+  with deep drop shadow, specular rim highlight, and macOS-style interactive magnification.
+  Built with Framer Motion spring physics (`useSpring`, `useTransform`) and
+  `@ybouane/liquidglass` WebGL refraction. Features:
+  - **Generous width**: wider baseline footprint (`px-4 sm:px-6 py-2.5 sm:py-3`, `gap-2 sm:gap-3.5`)
+    providing comfortable touch targets and breathing space.
+  - **Black glass aesthetic**: `bg-neutral-950/85` translucent body, `backdrop-blur-2xl`,
+    specular glass border (`border border-white/15`), and multi-layered deep shadow
+    (`shadow-[0_20px_50px_rgba(0,0,0,0.6),0_10px_20px_rgba(0,0,0,0.4),inset_0_1px_1px_0_rgba(255,255,255,0.2)]`).
+  - **macOS dock zooming magnifier effect**: dynamic mouse proximity tracking (`mouseX`),
+    scaling items up to 1.4x with upward spring lift (`y: -9px`, `transformOrigin: 'bottom center'`)
+    and organic margin breathing (`marginLeft`/`marginRight`) to part adjacent icons naturally.
+  - **macOS-style floating tooltips**: floating dark glass labels with downward caret appearing
+    above each hovered item.
+  - **Items**: prominent filled Resume pill (`bg-accent text-white`), GitHub / LinkedIn / Email
+    icon buttons, hairline divider, and animated sun/moon theme toggle.
+  - **Refraction & State**: theme switch refreshes the liquid-glass instance while `user-select`
+    remains preserved.
 
 ## Hero
 
@@ -273,6 +283,11 @@ framer-motion, `whileInView`, `once: true`, short durations). Link hovers
 transition with 150–200ms. The single persistent motion is the 2px orange
 scroll-progress line at the top of the viewport.
 
+- **GlassDock magnification**: dynamic macOS-style dock magnification driven
+  by cursor proximity with Framer Motion spring physics (`stiffness: 220`,
+  `damping: 15`, `mass: 0.1`). Smoothly magnifies icons up to 1.4x, lifts
+  them upward by -9px, and parts neighboring items with spring margins.
+
 Avoid: bouncy easing, parallax, spinning elements, background animation.
 
 ---
@@ -283,8 +298,9 @@ Avoid: bouncy easing, parallax, spinning elements, background animation.
 - Grids collapse: `3-col` → `1-col`.
 - Project rows stack; meta column aligns left on mobile.
 - SectionIndicator shrinks to edge ticks (labels hidden) on small screens.
-- GlassDock keeps the filled Resume pill labeled; social links become
-  icon-only below `sm`.
+- GlassDock retains its black glass aesthetic with responsive padding (`px-4 sm:px-6`);
+  touch drag simulates magnification on mobile while resting bounds remain comfortably
+  within viewport width.
 
 Do not shrink the desktop layout; reflow it.
 
