@@ -34,8 +34,13 @@ const GLASS_CONFIG = {
   bevelMode: 0,
 }
 
-const getStoredTheme = () =>
-  localStorage.getItem('theme') === 'light' ? 'light' : 'dark'
+const getStoredTheme = () => {
+  try {
+    return localStorage.getItem('theme') === 'light' ? 'light' : 'dark'
+  } catch {
+    return 'dark'
+  }
+}
 
 export default function GlassDock({ rootRef }) {
   const glassRef = useRef(null)
@@ -78,7 +83,11 @@ export default function GlassDock({ rootRef }) {
   const toggleTheme = () => {
     const next = theme === 'light' ? 'dark' : 'light'
     const apply = () => {
-      localStorage.setItem('theme', next)
+      try {
+        localStorage.setItem('theme', next)
+      } catch {
+        /* private mode / restricted storage — still flip the theme */
+      }
       document.documentElement.setAttribute('data-theme', next)
       setTheme(next)
     }
