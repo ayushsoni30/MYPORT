@@ -180,12 +180,23 @@ removed in favor of rows and columns separated by hairlines.
 
 # 4. Section-by-Section
 
-## Navbar
+## Floating Controls (was: Navbar)
 
-Fixed, transparent at top, blurred canvas once scrolled. Left: name in serif.
-Right: plain text links (Work, About, Skills, Timeline, Milestones) + theme
-toggle (sun/moon icon), Resume link and a "Get in touch" pill. Mobile:
-hamburger → full-height menu. No command palette, no search, no version badges.
+The top navbar is removed. Two floating, fixed elements remain:
+
+- **SectionIndicator** — fixed left edge (vertical center), `z-30`. Minimal
+  uppercase micro-labels (ABOUT / WORK / SKILLS / TIMELINE / MILESTONES),
+  each preceded by a short hairline tick that lengthens and turns orange for
+  the active section (intersection-based). Labels hidden on mobile, ticks
+  stay. Click → Lenis scroll to the section.
+- **GlassDock** — fixed bottom-center, `z-40`, a liquid-glass pill
+  (`@ybouane/liquidglass`) refracting the page behind it. Contains a
+  prominent filled Resume pill, then GitHub / LinkedIn / Email icons
+  (icon-only on mobile), a hairline divider, and the sun/moon theme toggle.
+  The App wrapper div is the LiquidGlass root; the dock is its only glass
+  child. Theme switch destroys + re-inits the liquid-glass instance so the
+  refracted scene refreshes with the new palette. `user-select` is restored
+  after init so page text remains selectable.
 
 ## Hero
 
@@ -271,7 +282,9 @@ Avoid: bouncy easing, parallax, spinning elements, background animation.
 - Fluid display type scales with the viewport.
 - Grids collapse: `3-col` → `1-col`.
 - Project rows stack; meta column aligns left on mobile.
-- Navbar links hide below `lg`; hamburger takes over.
+- SectionIndicator shrinks to edge ticks (labels hidden) on small screens.
+- GlassDock keeps the filled Resume pill labeled; social links become
+  icon-only below `sm`.
 
 Do not shrink the desktop layout; reflow it.
 

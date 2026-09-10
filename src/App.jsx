@@ -1,5 +1,5 @@
+import { useRef } from 'react'
 import { motion, useScroll, useSpring } from 'framer-motion'
-import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
 import Projects from './components/Projects'
@@ -9,9 +9,12 @@ import Education from './components/Education'
 import Milestones from './components/Milestones'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import SectionIndicator from './components/SectionIndicator'
+import GlassDock from './components/GlassDock'
 import { ReactLenis } from 'lenis/react'
 
 export default function App() {
+  const rootRef = useRef(null)
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -31,16 +34,16 @@ export default function App() {
         infinite: false,
       }}
     >
-      <div className="min-h-screen bg-base text-ink selection:bg-accent selection:text-base relative">
+      <div
+        ref={rootRef}
+        className="min-h-screen bg-base text-ink selection:bg-accent selection:text-base relative"
+      >
 
         {/* Minimal Thin Top Progress Line */}
         <motion.div
           className="fixed top-0 left-0 right-0 h-[2px] bg-accent z-100 origin-left"
           style={{ scaleX }}
         />
-
-        {/* Global Navigation */}
-        <Navbar />
 
         <main className="relative z-10">
           <Hero />
@@ -54,6 +57,10 @@ export default function App() {
         </main>
 
         <Footer />
+
+        {/* Floating Controls */}
+        <SectionIndicator />
+        <GlassDock rootRef={rootRef} />
 
       </div>
     </ReactLenis>

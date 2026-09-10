@@ -21,7 +21,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="pt-40 pb-28 border-b border-line relative overflow-hidden"
+      className="pt-16 md:pt-20 pb-28 border-b border-line relative overflow-hidden"
     >
       <GridGlow />
       <div className="px-6 md:px-12 max-w-7xl mx-auto relative">

@@ -70,7 +70,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 72px;
+  scroll-padding-top: 0;
   background-color: var(--base);
   color: var(--ink);
 }
