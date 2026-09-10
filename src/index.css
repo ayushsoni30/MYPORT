@@ -1,40 +1,56 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 @import "lenis/dist/lenis.css";
 
 @theme {
-  --color-bg-base: #0B0B0B;
-  --color-surface: #111111;
-  --color-surface-elevated: #151515;
-  --color-border: #252525;
-  --color-border-strong: #303030;
-  
-  --color-text-primary: #F2F2F0;
-  --color-text-secondary: #777777;
-  --color-text-muted: #555555;
-  --color-accent: #FF6900;
+  --color-base: var(--base);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-accent: var(--accent);
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', 'IBM Plex Mono', monospace;
-  --font-serif: 'DM Serif Display', Georgia, serif;
+  --font-serif: 'Fraunces', Georgia, serif;
 }
 
+/* Light — old paper with dark burnt-orange ink */
 :root {
-  --bg: #0B0B0B;
-  --surface: #111111;
-  --surface-elevated: #151515;
-  --border: #252525;
-  --border-strong: #303030;
-
-  --text-primary: #F2F2F0;
-  --text-secondary: #777777;
-  --text-muted: #555555;
-
-  --accent: #FF6900;
+  --base: #F5F1E8;
+  --surface: #EAE3D5;
+  --surface-elevated: #DFD5C0;
+  --line: #D8CCB4;
+  --line-strong: #C9BB9F;
+  --ink: #7B2816;
+  --ink-muted: #8A4A35;
+  --ink-faint: #B08A6E;
+  --ink-deep: #5C1D0E;
+  --accent: #C2410C;
 
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-pill: 999px;
+
+  color-scheme: light;
+}
+
+/* Dark — near-black canvas with warm off-white ink */
+[data-theme="dark"] {
+  --base: #101010;
+  --surface: #111111;
+  --surface-elevated: #151515;
+  --line: #252525;
+  --line-strong: #303030;
+  --ink: #F2F2F0;
+  --ink-muted: #777777;
+  --ink-faint: #555555;
+  --ink-deep: #E2E2E0;
+  --accent: #FF6900;
+
+  color-scheme: dark;
 }
 
 /* Custom Scrollbar */
@@ -42,50 +58,64 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0B0B0B;
+  background: var(--base);
 }
 ::-webkit-scrollbar-thumb {
-  background: #252525;
+  background: var(--line);
   border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #303030;
+  background: var(--ink-faint);
 }
 
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 72px;
-  background-color: #0B0B0B;
-  color: #F2F2F0;
+  background-color: var(--base);
+  color: var(--ink);
 }
 
 body {
-  background-color: #0B0B0B;
-  color: #F2F2F0;
+  background-color: var(--base);
+  color: var(--ink);
   font-family: var(--font-sans);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Structural Layout Container with Vertical Grid Boundaries */
+/* Native View Transition for theme switch — compositor-driven, no repaint storm */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 1000ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::view-transition-old(root) {
+  animation-name: vt-fade-out;
+}
+
+::view-transition-new(root) {
+  animation-name: vt-fade-in;
+}
+
+@keyframes vt-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes vt-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Structural Layout Container */
 .page-container {
   width: min(90vw, 1440px);
   margin-inline: auto;
-  border-inline: 1px solid var(--border);
 }
 
-/* Subtle Technical Repeating Vertical Grid */
-.technical-grid {
-  background-image: repeating-linear-gradient(
-    90deg,
-    transparent 0,
-    transparent 120px,
-    rgba(255, 255, 255, 0.02) 121px
-  );
-}
-
-/* Standard Eyebrow Label (DESIGN.md Section 8) */
+/* Standard Eyebrow Label */
 .eyebrow-label {
   display: inline-flex;
   align-items: center;
@@ -94,7 +124,7 @@ body {
   font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--text-secondary);
+  color: var(--ink-muted);
 }
 
 .eyebrow-marker {
@@ -105,14 +135,14 @@ body {
   flex-shrink: 0;
 }
 
-/* Industrial Buttons (DESIGN.md Section 12) */
+/* Buttons */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background-color: var(--text-primary);
-  color: #0B0B0B;
+  background-color: var(--ink);
+  color: var(--base);
   border-radius: 999px;
   font-family: var(--font-mono);
   font-size: 13px;
@@ -122,11 +152,11 @@ body {
   padding: 10px 24px;
   transition: transform 180ms ease, background-color 180ms ease;
   cursor: pointer;
-  border: 1px solid var(--text-primary);
+  border: 1px solid var(--ink);
 }
 
 .btn-primary:hover {
-  background-color: #E2E2E0;
+  background-color: var(--ink-deep);
   transform: translateY(-1px);
 }
 
@@ -136,8 +166,8 @@ body {
   justify-content: center;
   gap: 8px;
   background-color: transparent;
-  color: var(--text-primary);
-  border: 1px solid var(--border-strong);
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
   border-radius: 999px;
   font-family: var(--font-mono);
   font-size: 13px;
@@ -150,29 +180,19 @@ body {
 }
 
 .btn-secondary:hover {
-  border-color: #555555;
+  border-color: var(--ink-faint);
   background-color: var(--surface-elevated);
   transform: translateY(-1px);
 }
 
-/* Sharp Technical Panels & Cards */
-.card-panel {
-  background-color: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  transition: border-color 180ms ease, transform 180ms ease;
-}
-
-.card-panel:hover {
-  border-color: var(--border-strong);
-}
-
 /* Typography Helpers */
-.font-editorial {
+
+/* Display voice: Fraunces serif, medium weight, tight leading */
+.display {
   font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  color: var(--ink);
 }
-
-.font-tech {
-  font-family: var(--font-mono);
-}
-

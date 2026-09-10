@@ -1,131 +1,88 @@
 import { motion } from 'framer-motion'
-import { FiMail, FiPhone, FiMapPin, FiGithub, FiLinkedin, FiFileText, FiArrowUpRight } from 'react-icons/fi'
+import { FiArrowUpRight } from 'react-icons/fi'
 
 const CONTACT_POINTS = [
   {
-    icon: FiMail,
-    label: 'PRIMARY EMAIL',
+    label: 'Email',
     value: 'ayushsoni55aa@gmail.com',
     href: 'https://mail.google.com/mail/?view=cm&to=ayushsoni55aa@gmail.com',
-    action: 'SEND EMAIL ↗',
   },
   {
-    icon: FiPhone,
-    label: 'TELEPHONE',
+    label: 'Phone',
     value: '+91-8112987405',
     href: 'tel:+918112987405',
-    action: 'DIAL ↗',
   },
   {
-    icon: FiLinkedin,
-    label: 'LINKEDIN NETWORK',
+    label: 'LinkedIn',
     value: 'linkedin.com/in/ayushsoni3030',
     href: 'https://www.linkedin.com/in/ayushsoni3030',
-    action: 'CONNECT ↗',
   },
   {
-    icon: FiGithub,
-    label: 'GITHUB PROFILE',
+    label: 'GitHub',
     value: 'github.com/ayushsoni30',
     href: 'https://github.com/ayushsoni30',
-    action: 'VIEW ORG ↗',
-  },
-  {
-    icon: FiMapPin,
-    label: 'BASE LOCATION',
-    value: 'Lucknow, Uttar Pradesh, India',
-    href: null,
-    action: 'TIMEZONE: IST (UTC+5:30)',
   },
 ]
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-24 border-b border-[#252525] bg-[#0B0B0B] relative">
+    <section id="contact" className="py-28 border-b border-line relative">
       <div className="px-6 md:px-12 max-w-7xl mx-auto">
-        
-        {/* Section Header */}
+
+        {/* Big Editorial Question */}
         <div className="text-left mb-16">
-          <div className="eyebrow-label mb-3">
+          <div className="eyebrow-label mb-6">
             <span className="eyebrow-marker" />
-            <span>DIRECT INQUIRIES</span>
+            <span>08 — CONTACT</span>
           </div>
-          <h2 className="font-sans text-3xl md:text-5xl font-bold tracking-tight text-[#F2F2F0]">
-            Connect with Engineering
+          <h2 className="display text-4xl sm:text-6xl md:text-7xl max-w-4xl mb-8">
+            Have a project in mind? Let's talk.
           </h2>
-          <p className="font-sans text-base md:text-lg text-[#777777] mt-3 max-w-xl">
-            Open for software engineering roles, full stack projects, and high-leverage technical collaborations.
-          </p>
-        </div>
-
-        {/* Contact Points Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {CONTACT_POINTS.map((point, idx) => {
-            const Icon = point.icon
-            const isClickable = Boolean(point.href)
-            const CardElement = isClickable ? 'a' : 'div'
-
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.35, delay: idx * 0.05 }}
-              >
-                <CardElement
-                  href={point.href || undefined}
-                  target={isClickable && point.href?.startsWith('http') ? '_blank' : undefined}
-                  rel={isClickable && point.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className={`bg-[#111111] border border-[#252525] p-6 text-left flex flex-col justify-between h-full group transition-colors duration-180 block ${
-                    isClickable ? 'hover:border-[#303030] cursor-pointer' : 'cursor-default'
-                  }`}
-                >
-                  <div>
-                    <div className="flex items-center justify-between border-b border-[#252525] pb-3 mb-4">
-                      <span className="font-mono text-[10px] text-[#555555] uppercase tracking-wider">
-                        {point.label}
-                      </span>
-                      <Icon className="text-sm text-[#777777] group-hover:text-[#FF6900] transition-colors duration-150" />
-                    </div>
-
-                    <div className="font-mono text-sm font-semibold text-[#F2F2F0] break-all mb-4">
-                      {point.value}
-                    </div>
-                  </div>
-
-                  <div className="pt-3 border-t border-[#252525] font-mono text-[11px] text-[#777777] flex items-center justify-between group-hover:text-[#F2F2F0] transition-colors duration-150">
-                    <span>{point.action}</span>
-                    {isClickable && <FiArrowUpRight />}
-                  </div>
-                </CardElement>
-              </motion.div>
-            )
-          })}
-        </div>
-
-        {/* Action Button Row */}
-        <div className="flex flex-wrap items-center justify-start gap-4 pt-8 border-t border-[#252525]">
           <a
             href="https://mail.google.com/mail/?view=cm&to=ayushsoni55aa@gmail.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary"
+            className="font-serif text-2xl md:text-4xl italic text-accent hover:text-ink transition-colors duration-150"
           >
-            <span>SEND DIRECT EMAIL</span>
-            <FiArrowUpRight />
-          </a>
-
-          <a
-            href="https://drive.google.com/file/d/1NSBH94j34LY_SjHJsJv7tk_PZ33ooFAx/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-secondary"
-          >
-            <FiFileText />
-            <span>DOWNLOAD RESUME (PDF)</span>
+            ayushsoni55aa@gmail.com ↗
           </a>
         </div>
+
+        {/* Contact Row List */}
+        <div className="border-t border-line">
+          {CONTACT_POINTS.map((point, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: idx * 0.05 }}
+            >
+              <a
+                href={point.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between gap-4 py-6 border-b border-line group"
+              >
+                <span className="font-mono text-xs uppercase tracking-[0.14em] text-ink-faint group-hover:text-ink transition-colors duration-150">
+                  {point.label}
+                </span>
+                <span className="flex items-center gap-3">
+                  <span className="font-sans text-sm md:text-base text-ink break-all">
+                    {point.value}
+                  </span>
+                  <FiArrowUpRight className="text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-150" />
+                </span>
+              </a>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Note about availability */}
+        <p className="font-sans text-sm text-ink-muted mt-10 max-w-2xl">
+          Open for software engineering roles, full stack projects, and high-leverage technical
+          collaborations. Based in Lucknow, India (UTC+5:30).
+        </p>
 
       </div>
     </section>
