@@ -201,7 +201,7 @@ export default function GlassDock({ rootRef }) {
         if (e.touches && e.touches[0]) mouseX.set(e.touches[0].clientX)
       }}
       onTouchEnd={() => mouseX.set(Infinity)}
-      className="glass fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 sm:gap-3.5 rounded-full bg-neutral-950/85 backdrop-blur-2xl border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.6),0_10px_20px_rgba(0,0,0,0.4),inset_0_1px_1px_0_rgba(255,255,255,0.2)] px-4 sm:px-6 py-2.5 sm:py-3 transition-[box-shadow,border-color] duration-300 overflow-visible"
+      className="glass fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2.5 sm:gap-4 md:gap-4.5 rounded-full bg-neutral-950/85 backdrop-blur-2xl border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.6),0_10px_20px_rgba(0,0,0,0.4),inset_0_1px_1px_0_rgba(255,255,255,0.2)] px-5 sm:px-7 md:px-8 py-2.5 sm:py-3 transition-[box-shadow,border-color] duration-300 overflow-visible"
     >
       <DockItem
         mouseX={mouseX}
@@ -210,7 +210,7 @@ export default function GlassDock({ rootRef }) {
         rel="noopener noreferrer"
         tooltip="Resume"
         isResume
-        className="rounded-full bg-accent text-white font-mono text-[11px] sm:text-xs font-semibold uppercase tracking-[0.09em] px-4 sm:px-5 py-2 sm:py-2.5 shadow-[0_4px_14px_rgba(194,65,12,0.35)] hover:shadow-[0_6px_20px_rgba(194,65,12,0.5)] transition-[box-shadow,filter] duration-150 gap-2 shrink-0"
+        className="rounded-full bg-[#FF6900] text-white font-mono text-[11px] sm:text-xs font-semibold uppercase tracking-[0.1em] px-5 sm:px-6 py-2 sm:py-2.5 shadow-[0_4px_16px_rgba(255,105,0,0.4)] hover:shadow-[0_6px_22px_rgba(255,105,0,0.6)] transition-[box-shadow,filter] duration-150 gap-2 shrink-0"
       >
         <FiFileText className="text-sm sm:text-base shrink-0" />
         <span>Resume</span>
@@ -230,14 +230,14 @@ export default function GlassDock({ rootRef }) {
         </DockItem>
       ))}
 
-      <span className="relative z-[2] h-6 w-px bg-white/20 my-auto mx-1 sm:mx-1.5 shrink-0 select-none" />
+      <span className="relative z-[2] h-6 w-px bg-white/20 my-auto mx-1 sm:mx-2 shrink-0 select-none" />
 
       <DockItem
         mouseX={mouseX}
         onClick={toggleTheme}
         whileTap={{ scale: 1.2 }}
         tooltip={theme === 'light' ? 'Dark Mode' : 'Light Mode'}
-        className="w-10 h-10 sm:w-11 sm:h-11 rounded-full text-neutral-300 hover:text-accent hover:bg-white/12 active:bg-white/20 transition-colors duration-150 cursor-pointer shrink-0"
+        className="w-10 h-10 sm:w-11 sm:h-11 rounded-full text-neutral-300 hover:text-[#FF6900] hover:bg-white/12 active:bg-white/20 transition-colors duration-150 cursor-pointer shrink-0"
       >
         <AnimatePresence mode="wait" initial={false}>
           <motion.span

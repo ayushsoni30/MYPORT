@@ -193,7 +193,7 @@ The top navbar is removed. Two floating, fixed elements remain:
   with deep drop shadow, specular rim highlight, and macOS-style interactive magnification.
   Built with Framer Motion spring physics (`useSpring`, `useTransform`) and
   `@ybouane/liquidglass` WebGL refraction. Features:
-  - **Generous width**: wider baseline footprint (`px-4 sm:px-6 py-2.5 sm:py-3`, `gap-2 sm:gap-3.5`)
+  - **Generous width**: wider baseline footprint (`px-5 sm:px-7 md:px-8 py-2.5 sm:py-3`, `gap-2.5 sm:gap-4 md:gap-4.5`)
     providing comfortable touch targets and breathing space.
   - **Black glass aesthetic**: `bg-neutral-950/85` translucent body, `backdrop-blur-2xl`,
     specular glass border (`border border-white/15`), and multi-layered deep shadow
@@ -203,7 +203,7 @@ The top navbar is removed. Two floating, fixed elements remain:
     and organic margin breathing (`marginLeft`/`marginRight`) to part adjacent icons naturally.
   - **macOS-style floating tooltips**: floating dark glass labels with downward caret appearing
     above each hovered item.
-  - **Items**: prominent filled Resume pill (`bg-accent text-white`), GitHub / LinkedIn / Email
+  - **Items**: permanent vivid orange filled Resume pill (`bg-[#FF6900] text-white`, `px-5 sm:px-6`), GitHub / LinkedIn / Email
     icon buttons, hairline divider, and animated sun/moon theme toggle.
   - **Refraction & State**: theme switch refreshes the liquid-glass instance while `user-select`
     remains preserved.
