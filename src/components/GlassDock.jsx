@@ -4,7 +4,7 @@ import { LiquidGlass } from '@ybouane/liquidglass'
 import { FiFileText, FiGithub, FiLinkedin, FiMail, FiSun, FiMoon } from 'react-icons/fi'
 
 const RESUME_URL =
-  'https://drive.google.com/file/d/1NSBH94j34LY_SjHJsJv7tk_PZ33ooFAx/view?usp=sharing'
+  'https://drive.google.com/file/d/1-kh7hep20NrN1H6oHKZTFfX4J2eIX3EG/view?usp=sharing'
 
 const LINKS = [
   { label: 'GitHub', href: 'https://github.com/ayushsoni30', Icon: FiGithub },

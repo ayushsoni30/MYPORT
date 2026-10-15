@@ -61,7 +61,7 @@ export default function Hero() {
             </a>
 
             <a
-              href="https://drive.google.com/file/d/1NSBH94j34LY_SjHJsJv7tk_PZ33ooFAx/view?usp=sharing"
+              href="https://drive.google.com/file/d/1-kh7hep20NrN1H6oHKZTFfX4J2eIX3EG/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary"
