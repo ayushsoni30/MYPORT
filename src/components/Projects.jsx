@@ -4,6 +4,17 @@ import { FiArrowUpRight, FiGithub } from 'react-icons/fi'
 const PROJECTS = [
   {
     id: '01',
+    title: 'Roomora — Student Room Discovery & Booking Platform',
+    tagline: 'Find Your Space. Make It Home.',
+    category: 'FULL-STACK · WEB DEVELOPMENT · REST API',
+    description:
+      'Student-focused accommodation platform connecting students with room owners through location-based room discovery and booking requests. Built with React.js, FastAPI, and MongoDB, featuring JWT-based authentication, role-based access control, room management, and an owner approval booking workflow.',
+    tech: ['React.js', 'FastAPI', 'Python', 'MongoDB', 'JavaScript', 'JWT Authentication', 'REST APIs'],
+    demoUrl: 'https://r-ora.vercel.app/',
+    githubUrl: 'https://github.com/ayushsoni30/R-ORA',
+  },
+  {
+    id: '02',
     title: 'ZeniN — AI Technical Mentor',
     tagline: 'Real-time AI engineering assistant with Claude API',
     category: 'AI INFERENCE · MERN',
@@ -14,7 +25,7 @@ const PROJECTS = [
     githubUrl: 'https://github.com/ayushsoni30/ZENIN--TECH--AI',
   },
   {
-    id: '02',
+    id: '03',
     title: 'Quizii — Interactive Quiz Platform',
     tagline: 'High-performance reactive assessment engine',
     category: 'FRONTEND · REST API',
@@ -25,7 +36,7 @@ const PROJECTS = [
     githubUrl: 'https://github.com/ayushsoni30/Quizii-by-Ayush',
   },
   {
-    id: '03',
+    id: '04',
     title: 'HireCoreOS — AI Career & Recruitment OS',
     tagline: 'Autonomous career pathway and skill-gap analysis engine',
     category: 'ENTERPRISE · AI INTEGRATION',
@@ -59,7 +70,7 @@ export default function Projects() {
             Things I've shipped.
           </h2>
           <p className="font-sans text-base md:text-lg text-ink-muted max-w-2xl">
-            Three production systems — each with a live deployment, public source, and a
+            Four production systems — each with a live deployment, robust architecture, and a
             measurable performance profile.
           </p>
         </div>
@@ -104,26 +115,30 @@ export default function Projects() {
                     ))}
                   </div>
                   <div className="flex items-center gap-5">
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-ink hover:text-accent transition-colors duration-150"
-                      aria-label={`Live demo for ${project.title}`}
-                    >
-                      <span>Live</span>
-                      <FiArrowUpRight />
-                    </a>
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-ink hover:text-accent transition-colors duration-150"
-                      aria-label={`GitHub repo for ${project.title}`}
-                    >
-                      <FiGithub />
-                      <span>Code</span>
-                    </a>
+                    {project.demoUrl && (
+                      <a
+                        href={project.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-ink hover:text-accent transition-colors duration-150"
+                        aria-label={`Live demo for ${project.title}`}
+                      >
+                        <span>Live</span>
+                        <FiArrowUpRight />
+                      </a>
+                    )}
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-ink hover:text-accent transition-colors duration-150"
+                        aria-label={`GitHub repo for ${project.title}`}
+                      >
+                        <FiGithub />
+                        <span>Code</span>
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>

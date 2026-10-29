@@ -46,7 +46,7 @@ export default function Hero() {
           {/* Supporting Copy */}
           <p className="font-sans text-lg md:text-xl text-ink-muted max-w-2xl leading-relaxed mb-12">
             Full stack developer specializing in performant MERN architecture, Claude API
-            integrations, and robust database design. Three production systems are live today.
+            integrations, and robust database design. Four production systems are live today.
           </p>
 
           {/* CTA Row */}

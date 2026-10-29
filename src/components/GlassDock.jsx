@@ -42,10 +42,7 @@ const getStoredTheme = () => {
   }
 }
 
-/**
- * DockItem: Individual dock item that scales & lifts with macOS-style magnification
- * based on proximity to the cursor's horizontal coordinate (mouseX).
- */
+
 function DockItem({
   mouseX,
   children,
@@ -224,7 +221,7 @@ export default function GlassDock({ rootRef }) {
           target="_blank"
           rel="noopener noreferrer"
           tooltip={label}
-          className="w-10 h-10 sm:w-11 sm:h-11 rounded-full text-neutral-300 hover:text-white hover:bg-white/12 active:bg-white/20 transition-colors duration-150 shrink-0"
+          className="w-10 h-10 sm:w-11 sm:h-11 rounded-full text-neutral-300 hover:text-[#FF6900] transition-colors duration-150 shrink-0"
         >
           <Icon className="text-lg sm:text-xl" />
         </DockItem>
@@ -237,7 +234,7 @@ export default function GlassDock({ rootRef }) {
         onClick={toggleTheme}
         whileTap={{ scale: 1.2 }}
         tooltip={theme === 'light' ? 'Dark Mode' : 'Light Mode'}
-        className="w-10 h-10 sm:w-11 sm:h-11 rounded-full text-neutral-300 hover:text-[#FF6900] hover:bg-white/12 active:bg-white/20 transition-colors duration-150 cursor-pointer shrink-0"
+        className="w-10 h-10 sm:w-11 sm:h-11 rounded-full text-neutral-300 hover:text-[#FF6900] transition-colors duration-150 cursor-pointer shrink-0"
       >
         <AnimatePresence mode="wait" initial={false}>
           <motion.span

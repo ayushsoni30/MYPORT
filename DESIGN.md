@@ -204,7 +204,7 @@ The top navbar is removed. Two floating, fixed elements remain:
   - **macOS-style floating tooltips**: floating dark glass labels with downward caret appearing
     above each hovered item.
   - **Items**: permanent vivid orange filled Resume pill (`bg-[#FF6900] text-white`, `px-5 sm:px-6`), GitHub / LinkedIn / Email
-    icon buttons, hairline divider, and animated sun/moon theme toggle.
+    icon buttons (hover transitions cleanly to `#FF6900` accent orange with zero white background fill), hairline divider, and animated sun/moon theme toggle.
   - **Refraction & State**: theme switch refreshes the liquid-glass instance while `user-select`
     remains preserved.
 
